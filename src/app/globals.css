@@ -1,26 +1,108 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FCFBF7;
+    --foreground: #221F1E;
+    
+    /* White-Gold-Orange Palette */
+    --gold-primary: #C69214;
+    --gold-light: #FBF4E4;
+    --gold-dark: #976F0E;
+    
+    --orange-primary: #D95D24;
+    --orange-light: #FEF0EA;
+    --orange-dark: #A94314;
+    
+    --cream-surface: #F8F5EE;
+    --cream-card: #FFFFFF;
+    --cream-border: #EADBCC;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom Heritage Gradients & Textures */
+.bg-heritage-gradient {
+  background: linear-gradient(135deg, #FCFBF7 0%, #F8F4EA 50%, #FEF5ED 100%);
 }
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #DFB343 0%, #C69214 50%, #A0720A 100%);
+}
+
+.bg-orange-gradient {
+  background: linear-gradient(135deg, #E66B33 0%, #D95D24 50%, #B74715 100%);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #B9850E 0%, #DFB343 50%, #946908 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-orange-gradient {
+  background: linear-gradient(135deg, #D95D24 0%, #E66B33 50%, #A94314 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtly patterned heritage borders */
+.heritage-card {
+  background: #FFFFFF;
+  border: 1px solid #EFE8DA;
+  box-shadow: 0 4px 20px -2px rgba(198, 146, 20, 0.06), 0 2px 6px -1px rgba(217, 93, 36, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.heritage-card:hover {
+  border-color: #DFB343;
+  box-shadow: 0 12px 30px -4px rgba(198, 146, 20, 0.12), 0 4px 12px -2px rgba(217, 93, 36, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Ticker Animation */
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker 35s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* Subtle Shimmer for 125th Anniversary Badges */
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-gold {
+  background: linear-gradient(90deg, rgba(223, 179, 67, 0.1) 0%, rgba(223, 179, 67, 0.3) 50%, rgba(223, 179, 67, 0.1) 100%);
+  background-size: 200% 100%;
+  animation: goldShimmer 4s infinite;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
