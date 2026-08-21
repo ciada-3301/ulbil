@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import HeroSection from '@/components/home/HeroSection';
 import NoticeTicker from '@/components/home/NoticeTicker';
+import HeritageCarousel from '@/components/home/HeritageCarousel';
 import JubileeCelebrationBanner from '@/components/home/JubileeCelebrationBanner';
 import WingsGrid from '@/components/home/WingsGrid';
 import CatalogueSpotlight from '@/components/home/CatalogueSpotlight';
@@ -30,10 +31,13 @@ export default function Home() {
       {/* 2. Live Notice Ribbon */}
       <NoticeTicker />
 
-      {/* 3. 125th Jubilee Celebration Callout */}
+      {/* 3. Living Heritage Showcase & Photo Slideshow */}
+      <HeritageCarousel />
+
+      {/* 4. 125th Jubilee Celebration Callout */}
       <JubileeCelebrationBanner />
 
-      {/* 4. Historic Impact Banner: Mothers of Uluberia College & Binapani High */}
+      {/* 5. Historic Impact Banner: Mothers of Uluberia College & Binapani High */}
       <section className="py-14 bg-white border-b border-[#EADBCC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#FEF5ED] via-[#FCFBF7] to-[#FAF6ED] border-2 border-[#DFB343]/70 shadow-xs">
