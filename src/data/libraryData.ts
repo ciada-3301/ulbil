@@ -372,12 +372,25 @@ export const GALLERY_SLIDES = [
   { id: 12, title: 'Executive Committee & Patron Assembly', year: 'Governing Council', url: 'https://www.ulbil.org/images/Banner/13.jpg', category: 'Council' }
 ];
 
-export const MEMBERSHIP_TIERS = [
+export interface MembershipTier {
+  id: string;
+  name: string;
+  bengaliName: string;
+  fee: string;
+  period: string;
+  deposit: string;
+  quota: string;
+  features: string[];
+  recommended?: boolean;
+}
+
+export const MEMBERSHIP_TIERS: MembershipTier[] = [
   {
     id: 'general',
     name: 'General Reader Membership',
     bengaliName: 'সাধারণ পাঠক সদস্যতা',
-    fee: '₹100 / year',
+    fee: '₹100',
+    period: '/ annual',
     deposit: '₹200 (Refundable Caution Deposit)',
     quota: '2 Books at a time for 14 days',
     features: [
@@ -392,7 +405,8 @@ export const MEMBERSHIP_TIERS = [
     id: 'student',
     name: 'Student & Senior Concession',
     bengaliName: 'ছাত্র ও প্রবীণ নাগরিক সদস্যতা',
-    fee: '₹50 / year',
+    fee: '₹50',
+    period: '/ annual',
     deposit: '₹100 (Refundable Caution Deposit)',
     quota: '2 Books + 1 Competitive Examination Guide',
     features: [
@@ -407,7 +421,8 @@ export const MEMBERSHIP_TIERS = [
     id: 'life-member',
     name: 'Honourable Life Patron',
     bengaliName: 'আজীবন পৃষ্ঠপোষক সদস্যতা',
-    fee: '₹2,500 (One-time Lifetime contribution)',
+    fee: '₹2,500',
+    period: 'One-time Lifetime',
     deposit: 'No Recurring Deposit',
     quota: '4 Books at a time + Priority Periodicals',
     features: [

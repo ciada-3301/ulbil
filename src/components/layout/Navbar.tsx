@@ -112,15 +112,9 @@ export default function Navbar() {
             </div>
             
             <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="font-serif font-bold text-sm sm:text-base tracking-tight text-[#221F1E] group-hover:text-[#C2592B] transition-colors leading-tight">
-                  ULUBERIA INSTITUTE & LIBRARY
-                </span>
-                <span className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-[#FEF5ED] text-[#C2592B] border border-[#DFB343]/50 shadow-2xs">
-                  <Sparkles className="w-2 h-2 text-[#C69214]" />
-                  125 Yrs
-                </span>
-              </div>
+              <span className="font-serif font-bold text-sm sm:text-base tracking-tight text-[#221F1E] group-hover:text-[#C2592B] transition-colors leading-tight">
+                ULUBERIA INSTITUTE & LIBRARY
+              </span>
               <div className="flex items-center gap-1.5 text-[10px] text-[#7A6E65] leading-none mt-0.5">
                 <span className="font-semibold text-[#C69214]">Estd. 1902</span>
                 <span>•</span>

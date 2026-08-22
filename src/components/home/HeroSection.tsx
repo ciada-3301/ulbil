@@ -44,8 +44,8 @@ export default function HeroSection() {
             <Sparkles className="w-3.5 h-3.5 text-[#C69214]" />
           </div>
 
-          {/* Main Title */}
-          <h1 className="font-serif font-extrabold text-3xl sm:text-5xl lg:text-6xl text-[#221F1E] tracking-tight leading-[1.15]">
+          {/* Main Title in Indic Hindi-English Style */}
+          <h1 className="font-indic text-3xl sm:text-5xl lg:text-6xl text-[#221F1E] tracking-wide leading-[1.2] drop-shadow-xs">
             A Century & A Quarter of <br />
             <span className="bg-gradient-to-r from-[#D95D24] via-[#C69214] to-[#A0720A] bg-clip-text text-transparent">
               Knowledge, Culture & Community

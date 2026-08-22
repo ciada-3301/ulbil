@@ -22,7 +22,7 @@ export default function JubileeCelebrationBanner() {
                 <span>1902 – 2027 • Quasquicentennial Commemoration</span>
               </div>
 
-              <h2 className="font-serif font-extrabold text-2xl sm:text-4xl text-[#221F1E] leading-tight">
+              <h2 className="font-indic text-2xl sm:text-4xl text-[#221F1E] leading-tight">
                 Celebrating 125 Years of <br />
                 <span className="text-gold-gradient">
                   Mankind, Society & Culture
