@@ -34,7 +34,7 @@ export default function AnniversaryPage() {
             <span>1902 — 2027 • Quasquicentennial Milestone</span>
           </div>
 
-          <h1 className="font-serif font-extrabold text-3xl sm:text-5xl text-[#221F1E] leading-tight">
+          <h1 className="font-indic text-3xl sm:text-5xl text-[#221F1E] leading-tight">
             125 Years of Illuminating <br />
             <span className="text-gold-gradient">Mankind, Society & Culture</span>
           </h1>
