@@ -51,6 +51,12 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Indic Hindi-English Hybrid Font Style */
+.font-indic {
+  font-family: var(--font-indic), "Cinzel", serif;
+  letter-spacing: 0.02em;
+}
+
 /* Subtly patterned heritage borders */
 .heritage-card {
   background: #FFFFFF;
