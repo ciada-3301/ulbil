@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Cinzel } from "next/font/google";
+import { Plus_Jakarta_Sans, Cinzel, Yatra_One } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -13,6 +13,13 @@ const plusJakarta = Plus_Jakarta_Sans({
 const cinzel = Cinzel({
   subsets: ["latin"],
   variable: "--font-serif",
+  display: "swap",
+});
+
+const yatraOne = Yatra_One({
+  weight: "400",
+  subsets: ["latin", "devanagari"],
+  variable: "--font-indic",
   display: "swap",
 });
 
@@ -62,7 +69,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${plusJakarta.variable} ${cinzel.variable} scroll-smooth`}>
+    <html lang="en" className={`${plusJakarta.variable} ${cinzel.variable} ${yatraOne.variable} scroll-smooth`}>
       <body className="min-h-screen flex flex-col font-sans bg-[#FCFBF7] text-[#221F1E] antialiased selection:bg-[#FEF0EA] selection:text-[#D95D24]">
         <Navbar />
         <main className="flex-1">
