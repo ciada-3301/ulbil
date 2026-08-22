@@ -74,10 +74,10 @@ export default function MembershipPage() {
                   <p className="text-xs text-[#8C6D23] font-semibold mt-0.5">{tier.bengaliName}</p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[#FCFBF7] border border-[#EADBCC]/80 space-y-1">
-                  <div className="flex items-baseline gap-1 text-[#C2592B]">
-                    <span className="font-serif font-extrabold text-3xl">{tier.fee}</span>
-                    <span className="text-xs font-semibold text-[#7A6E65]">/ annual</span>
+                <div className="p-4 rounded-2xl bg-[#FCFBF7] border border-[#EADBCC]/80 space-y-1.5 overflow-hidden">
+                  <div className="flex flex-wrap items-baseline gap-1.5 text-[#C2592B]">
+                    <span className="font-serif font-extrabold text-3xl tracking-tight">{tier.fee}</span>
+                    <span className="text-xs font-semibold text-[#7A6E65]">{tier.period}</span>
                   </div>
                   <div className="text-[11px] text-[#7A6E65]">
                     <strong>Deposit:</strong> {tier.deposit}
@@ -157,9 +157,9 @@ export default function MembershipPage() {
                   onChange={(e) => setSelectedTier(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl bg-[#FCFBF7] border border-[#EADBCC] text-xs focus:border-[#C2592B] focus:outline-hidden text-[#221F1E]"
                 >
-                  <option value="Student & Young Reader">Student & Young Reader (₹100/yr)</option>
-                  <option value="Ordinary Reader (General)">Ordinary Reader - General (₹250/yr)</option>
-                  <option value="Life Patron & Research Fellow">Life Patron & Research Fellow (₹5,000 one-time)</option>
+                  <option value="General Reader Membership">General Reader Membership (₹100/yr)</option>
+                  <option value="Student & Senior Concession">Student & Senior Concession (₹50/yr)</option>
+                  <option value="Honourable Life Patron">Honourable Life Patron (₹2,500 one-time)</option>
                 </select>
               </div>
 
