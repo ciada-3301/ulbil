@@ -1,0 +1,165 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  MEMBER
+  SCHOLAR
+  LIBRARIAN
+  ADMIN
+}
+
+enum MembershipTier {
+  GENERAL
+  STUDENT_SENIOR
+  LIFE_PATRON
+}
+
+enum MembershipStatus {
+  PENDING_VERIFICATION
+  ACTIVE
+  EXPIRED
+  SUSPENDED
+}
+
+enum LoanStatus {
+  ISSUED
+  RETURNED
+  OVERDUE
+}
+
+enum PaymentPurpose {
+  MEMBERSHIP
+  ANNUAL_RENEWAL
+  JUBILEE_DONATION
+  SOUVENIR_PURCHASE
+  LIBRARY_FINE
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String
+  email         String          @unique
+  emailVerified DateTime?
+  phone         String          @unique
+  phoneVerified Boolean         @default(false)
+  password      String?
+  image         String?
+  role          Role            @default(MEMBER)
+  memberId      String?         @unique // e.g. UIL-2026-0142
+  address       String?
+  seniorMode    Boolean         @default(false)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  accounts      Account[]
+  sessions      Session[]
+  membership    Membership?
+  loans         BookLoan[]
+  payments      Payment[]
+  donations     Donation[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Membership {
+  id           String           @id @default(cuid())
+  userId       String           @unique
+  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tier         MembershipTier
+  status       MembershipStatus @default(PENDING_VERIFICATION)
+  startDate    DateTime         @default(now())
+  validUntil   DateTime?        // null for Life Patron
+  depositPaid  Float            @default(0)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+}
+
+model BookLoan {
+  id              String     @id @default(cuid())
+  userId          String
+  user            User       @relation(fields: [userId], references: [id])
+  bookAccessionNo String
+  bookTitle       String
+  author          String
+  issuedDate      DateTime   @default(now())
+  dueDate         DateTime
+  returnDate      DateTime?
+  status          LoanStatus @default(ISSUED)
+  fineAmount      Float      @default(0)
+}
+
+model Payment {
+  id                String         @id @default(cuid())
+  userId            String
+  user              User           @relation(fields: [userId], references: [id])
+  amount            Float
+  currency          String         @default("INR")
+  purpose           PaymentPurpose
+  receiptNo         String         @unique
+  paymentMethod     String         @default("UPI")
+  razorpayOrderId   String?        @unique
+  razorpayPaymentId String?        @unique
+  status            PaymentStatus  @default(PENDING)
+  createdAt         DateTime       @default(now())
+}
+
+model Donation {
+  id             String   @id @default(cuid())
+  userId         String?
+  user           User?    @relation(fields: [userId], references: [id])
+  donorName      String
+  email          String
+  phone          String
+  panNumber      String?
+  amount         Float
+  receiptNo      String   @unique
+  message        String?
+  isAnonymous    Boolean  @default(false)
+  createdAt      DateTime @default(now())
+}
