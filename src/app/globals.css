@@ -112,3 +112,40 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Senior Reader Mode (সহজ পাঠ) Accessibility Styles */
+html.senior-mode {
+  font-size: 115%;
+}
+
+html.senior-mode body {
+  background-color: #FAF6ED;
+  color: #12100E;
+  line-height: 1.75;
+}
+
+html.senior-mode .heritage-card {
+  border-width: 2px !important;
+  border-color: #C69214 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.senior-mode p,
+html.senior-mode span,
+html.senior-mode li,
+html.senior-mode input,
+html.senior-mode button {
+  letter-spacing: 0.015em;
+}
+
+/* Print styles for wallet card cutout */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  header, footer, nav, button {
+    display: none !important;
+  }
+}
+
+
