@@ -4,28 +4,36 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useSeniorMode } from '@/components/providers/SeniorModeProvider';
 import { 
-  Menu, 
-  X, 
+  Sparkles, 
   Clock, 
   Phone, 
-  Sparkles, 
+  Menu, 
+  X, 
+  BookOpen, 
   Award,
-  BookOpen
+  ChevronRight,
+  HeartHandshake,
+  User,
+  ShieldCheck,
+  QrCode
 } from 'lucide-react';
 import { LIBRARY_INFO } from '@/data/libraryData';
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [timeStr, setTimeStr] = useState<string>('');
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [language, setLanguage] = useState<'EN' | 'BN'>('EN');
   const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [language, setLanguage] = useState<'EN' | 'BN'>('EN');
+  const [timeStr, setTimeStr] = useState<string>('');
+
+  const { seniorMode, toggleSeniorMode } = useSeniorMode();
 
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      setTimeStr(now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }));
+      setTimeStr(now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit' }));
     };
     updateTime();
     const interval = setInterval(updateTime, 1000);
@@ -50,6 +58,7 @@ export default function Navbar() {
     { href: '/notices', label: 'Notices', bengaliLabel: 'বিজ্ঞপ্তি' },
     { href: '/gallery', label: 'Gallery', bengaliLabel: 'চিত্রশালা' },
     { href: '/membership', label: 'Membership', bengaliLabel: 'সদস্যতা' },
+    { href: '/donate', label: '125th Fund', bengaliLabel: 'অনুদান', isHighlight: true },
     { href: '/contact', label: 'Contact', bengaliLabel: 'যোগাযোগ' },
   ];
 
@@ -72,13 +81,29 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Right: Phone, Email & Language Switcher */}
-          <div className="flex items-center gap-3">
+          {/* Right: Senior Reader Mode, Phone & Language Switcher */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={toggleSeniorMode}
+              className={`px-1.5 py-0.5 rounded text-[10px] font-bold transition-all flex items-center gap-1 cursor-pointer ${
+                seniorMode 
+                  ? 'bg-[#C2592B] text-white shadow-2xs' 
+                  : 'bg-white border border-[#DFB343] text-[#8C6D23] hover:bg-[#FEF5ED]'
+              }`}
+              title="Toggle Large Text / Senior Reader Accessibility"
+            >
+              <span>👓 {seniorMode ? 'সহজ পাঠ (ON)' : 'সহজ পাঠ'}</span>
+            </button>
+
+            <span className="hidden sm:inline text-neutral-300">|</span>
+
             <a href="tel:+919836330911" className="hidden sm:flex items-center gap-1 hover:text-[#C2592B] transition-colors">
               <Phone className="w-2.5 h-2.5 text-[#C69214]" />
               <span>{LIBRARY_INFO.phone}</span>
             </a>
+
             <span className="hidden sm:inline text-neutral-300">|</span>
+
             <div className="flex items-center gap-2">
               <button 
                 onClick={() => setLanguage(language === 'EN' ? 'BN' : 'EN')}
@@ -92,13 +117,13 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Main Navigation Bar (Slim & Streamlined) */}
-      <nav className={`bg-white/95 backdrop-blur-md border-b border-[#EADBCC] transition-shadow duration-300 ${
-        isScrolled ? 'shadow-md shadow-[#C69214]/5' : ''
+      {/* Main Heritage Navbar */}
+      <nav className={`bg-white/95 backdrop-blur-md border-b border-[#EADBCC] transition-all duration-300 ${
+        isScrolled ? 'py-1.5 shadow-sm' : 'py-2 sm:py-2.5'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-1.5 sm:py-2 flex items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
           
-          {/* Brand Logo & 125th Crest */}
+          {/* Brand Logo & Title */}
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="relative w-8 h-10 shrink-0 flex items-center justify-center p-0.5 bg-gradient-to-b from-[#FEF5ED] to-white rounded-md border border-[#DFB343]/60 shadow-2xs group-hover:border-[#C69214] transition-all">
               <Image 
@@ -106,7 +131,7 @@ export default function Navbar() {
                 alt="Uluberia Institute & Library Logo" 
                 width={26} 
                 height={34} 
-                className="object-contain"
+                className="object-contain" 
                 priority
               />
             </div>
@@ -133,7 +158,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-2.5 py-1 rounded-md transition-all relative ${
+                  className={`px-2 py-1 rounded-md transition-all relative ${
                     isActive 
                       ? 'text-[#C2592B] font-bold bg-[#FEF5ED]' 
                       : link.isHighlight 
@@ -153,14 +178,22 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Right Action Button */}
+          {/* Right Action Buttons: Sign In / Dashboard & Donate */}
           <div className="hidden sm:flex items-center gap-2">
             <Link
-              href="/membership"
+              href="/auth/signin"
+              className="px-2.5 py-1.5 rounded-lg text-xs font-bold text-[#8C6D23] bg-[#FCFBF7] border border-[#DFB343] hover:bg-[#FEF5ED] hover:text-[#C2592B] transition-colors flex items-center gap-1"
+            >
+              <User className="w-3 h-3 text-[#C69214]" />
+              <span>Member Sign In</span>
+            </Link>
+
+            <Link
+              href="/donate"
               className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-[#D95D24] to-[#C69214] hover:from-[#C2592B] hover:to-[#B0800F] shadow-2xs hover:shadow-xs transition-all flex items-center gap-1 active:scale-95"
             >
-              <Award className="w-3 h-3" />
-              <span>Join Library</span>
+              <HeartHandshake className="w-3 h-3" />
+              <span>125th Fund</span>
             </Link>
           </div>
 
@@ -201,15 +234,41 @@ export default function Navbar() {
             </div>
             
             <div className="pt-2 flex flex-col gap-2">
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href="/auth/signin"
+                  onClick={() => setIsOpen(false)}
+                  className="text-center py-2 rounded-lg text-xs font-bold text-[#8C6D23] bg-[#FCFBF7] border border-[#DFB343]"
+                >
+                  Member Sign In
+                </Link>
+                <Link
+                  href="/dashboard"
+                  onClick={() => setIsOpen(false)}
+                  className="text-center py-2 rounded-lg text-xs font-bold text-[#C2592B] bg-[#FEF5ED] border border-[#C2592B]/40"
+                >
+                  My Member Card
+                </Link>
+              </div>
+
               <Link
-                href="/membership"
+                href="/donate"
                 onClick={() => setIsOpen(false)}
                 className="w-full text-center py-2.5 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-[#D95D24] to-[#C69214] shadow-sm"
               >
-                Apply for Online Membership
+                Contribute to 125th Jubilee Fund
               </Link>
-              <div className="text-center text-[11px] text-[#7A6E65]">
-                Helpline: (+91) 98363 30911
+
+              <div className="flex items-center justify-between text-[10px] text-[#7A6E65] pt-1 px-1">
+                <Link href="/librarian" onClick={() => setIsOpen(false)} className="hover:underline">
+                  Librarian Desk
+                </Link>
+                <span>•</span>
+                <Link href="/admin" onClick={() => setIsOpen(false)} className="hover:underline">
+                  Admin Portal
+                </Link>
+                <span>•</span>
+                <span>(+91) 98363 30911</span>
               </div>
             </div>
           </div>
