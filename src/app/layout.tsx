@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Cinzel, Yatra_One } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { SeniorModeProvider } from "@/components/providers/SeniorModeProvider";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ const yatraOne = Yatra_One({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ulbil.org"),
   title: {
     default: "Uluberia Institute & Library | 125th Quasquicentennial Jubilee (1902–2027)",
     template: "%s | Uluberia Institute & Library"
@@ -63,6 +65,40 @@ export const metadata: Metadata = {
   }
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Library",
+  "name": "Uluberia Institute & Library",
+  "alternateName": "উলুবেড়িয়া ইনস্টিটিউট ও লাইব্রেরি",
+  "url": "https://ulbil.org",
+  "logo": "https://www.ulbil.org/images/Logo/logo_digital.png",
+  "foundingDate": "1902",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Institute Road, Uluberia",
+    "addressLocality": "Howrah",
+    "addressRegion": "West Bengal",
+    "postalCode": "711315",
+    "addressCountry": "IN"
+  },
+  "telephone": "+91-9836330911",
+  "email": "ulu.ins.library@ulbil.org",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "09:00",
+      "closes": "12:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "16:00",
+      "closes": "19:00"
+    }
+  ]
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -70,12 +106,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${plusJakarta.variable} ${cinzel.variable} ${yatraOne.variable} scroll-smooth`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col font-sans bg-[#FCFBF7] text-[#221F1E] antialiased selection:bg-[#FEF0EA] selection:text-[#D95D24]">
-        <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <SeniorModeProvider>
+          <Navbar />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </SeniorModeProvider>
       </body>
     </html>
   );
