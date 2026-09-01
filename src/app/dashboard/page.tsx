@@ -22,7 +22,8 @@ import {
   FileCheck,
   CheckCircle2,
   CreditCard,
-  RotateCcw
+  RotateCcw,
+  Glasses
 } from 'lucide-react';
 import { generateQrDataUrl } from '@/lib/qr';
 import { INITIAL_PATRONS, INITIAL_LOANS, INITIAL_PAYMENTS, Patron, BookLoan } from '@/data/mockStore';
@@ -96,6 +97,7 @@ export default function MemberDashboardPage() {
                 src={patron.photoUrl}
                 alt={patron.name}
                 fill
+                sizes="80px"
                 className="object-cover"
                 unoptimized
               />
@@ -130,7 +132,8 @@ export default function MemberDashboardPage() {
                 : 'bg-white border border-[#DFB343] text-[#8C6D23] hover:bg-[#FEF5ED]'
             }`}
           >
-            <span>👓 {seniorMode ? 'Senior Mode (ON)' : 'Senior Reader Mode'}</span>
+            <Glasses className="w-3.5 h-3.5" />
+            <span>{seniorMode ? 'Senior Mode (ON)' : 'Senior Reader Mode'}</span>
           </button>
 
           <Link

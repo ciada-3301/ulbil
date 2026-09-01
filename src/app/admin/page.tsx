@@ -46,7 +46,7 @@ export default function AdminManagerPage() {
       setIsAuthenticated(true);
       setErrorMsg('');
     } else {
-      setErrorMsg('Invalid Administrator security PIN. (Hint for development: admin1902)');
+      setErrorMsg('Invalid Administrator security PIN. Unauthorized access is restricted.');
     }
   };
 

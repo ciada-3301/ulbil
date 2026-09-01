@@ -38,12 +38,11 @@ export default function LibrarianDeskPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Default staff terminal passcode
     if (passcode.toLowerCase() === 'uil1902' || passcode.toLowerCase() === 'staff') {
       setIsAuthenticated(true);
       setErrorMsg('');
     } else {
-      setErrorMsg('Invalid staff security PIN. (Hint for development: uil1902)');
+      setErrorMsg('Invalid staff security PIN. Please contact the Head Librarian.');
     }
   };
 

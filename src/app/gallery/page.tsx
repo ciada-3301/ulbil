@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import Image from 'next/image';
@@ -19,15 +19,15 @@ export default function GalleryPage() {
     <div className="py-12 space-y-16">
       
       {/* Header Banner */}
-      <section className="bg-gradient-to-b from-[#FCFBF7] to-[#FAF6ED] border-b border-[#EADBCC] py-12 px-4 sm:px-8">
+      <section className="bg-gradient-to-b from-[#F5F0E8] to-[#F5F0E8] border-b border-[#E8E0D4] py-12 px-4 sm:px-8">
         <div className="max-w-4xl mx-auto text-center space-y-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#C2592B] bg-white px-3.5 py-1 rounded-full border border-[#DFB343]/60 shadow-2xs">
+          <span className="text-sm font-bold uppercase tracking-widest text-[#D95D24] bg-white px-3.5 py-1 rounded-full border border-[#B8860B]/60 shadow-sm">
             Visual Heritage
           </span>
-          <h1 className="font-serif font-extrabold text-3xl sm:text-5xl text-[#221F1E]">
+          <h1 className="font-serif font-extrabold text-3xl sm:text-5xl text-[#2C2420]">
             Photo Gallery & Digital Archives
           </h1>
-          <p className="text-xs sm:text-sm text-[#5A504B] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#6B635D] leading-relaxed">
             Photographic records of landmark commemorations, literary seminars, annual drama festivals, and daily reading room life.
           </p>
         </div>
@@ -42,10 +42,10 @@ export default function GalleryPage() {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+              className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all cursor-pointer ${
                 selectedCategory === cat
-                  ? 'bg-[#C2592B] text-white shadow-xs'
-                  : 'bg-white border border-[#EADBCC] text-[#5A504B] hover:border-[#DFB343] hover:text-[#C2592B]'
+                  ? 'bg-[#D95D24] text-white shadow-xs'
+                  : 'bg-white border border-[#E8E0D4] text-[#6B635D] hover:border-[#B8860B] hover:text-[#D95D24]'
               }`}
             >
               {cat}
@@ -59,18 +59,19 @@ export default function GalleryPage() {
             <div
               key={photo.id}
               onClick={() => setActivePhoto(photo)}
-              className="heritage-card rounded-2xl overflow-hidden bg-white border border-[#EADBCC] group cursor-pointer"
+              className="heritage-card rounded-2xl overflow-hidden bg-white border border-[#E8E0D4] group cursor-pointer"
             >
               <div className="relative h-56 w-full bg-[#FAF7F0] overflow-hidden">
                 <Image
                   src={photo.url}
                   alt={photo.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                   unoptimized
                 />
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="px-3 py-1.5 rounded-lg bg-white/90 text-xs font-bold text-[#221F1E] flex items-center gap-1">
+                  <span className="px-3 py-1.5 rounded-lg bg-white/90 text-sm font-bold text-[#2C2420] flex items-center gap-1">
                     <ZoomIn className="w-3.5 h-3.5" />
                     <span>Enlarge</span>
                   </span>
@@ -79,10 +80,10 @@ export default function GalleryPage() {
 
               <div className="p-4 space-y-1">
                 <div className="flex items-center justify-between text-[10px]">
-                  <span className="font-bold text-[#C69214] uppercase tracking-wider">{photo.year}</span>
-                  <span className="text-[#7A6E65]">{photo.category}</span>
+                  <span className="font-bold text-[#B8860B] uppercase tracking-wider">{photo.year}</span>
+                  <span className="text-[#9A918A]">{photo.category}</span>
                 </div>
-                <h3 className="font-serif font-bold text-xs text-[#221F1E] group-hover:text-[#C2592B] transition-colors line-clamp-1">
+                <h3 className="font-serif font-bold text-sm text-[#2C2420] group-hover:text-[#D95D24] transition-colors line-clamp-1">
                   {photo.title}
                 </h3>
               </div>
@@ -95,7 +96,7 @@ export default function GalleryPage() {
       {/* Fullscreen Photo Lightbox Modal */}
       {activePhoto && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-3xl w-full overflow-hidden border-2 border-[#DFB343] shadow-2xl animate-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-2xl max-w-3xl w-full overflow-hidden border-2 border-[#B8860B] shadow-2xl animate-in zoom-in-95 duration-200">
             <div className="relative h-80 sm:h-96 w-full bg-neutral-900">
               <Image
                 src={activePhoto.url}
@@ -114,12 +115,12 @@ export default function GalleryPage() {
 
             <div className="p-6 bg-white space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#C2592B] uppercase tracking-wider">
-                  {activePhoto.year} • {activePhoto.category}
+                <span className="text-sm font-bold text-[#D95D24] uppercase tracking-wider">
+                  {activePhoto.year} â€¢ {activePhoto.category}
                 </span>
-                <span className="text-xs text-[#7A6E65]">Archived at Uluberia Institute & Library</span>
+                <span className="text-sm text-[#9A918A]">Archived at Uluberia Institute & Library</span>
               </div>
-              <h3 className="font-serif font-bold text-lg text-[#221F1E]">
+              <h3 className="font-serif font-bold text-lg text-[#2C2420]">
                 {activePhoto.title}
               </h3>
             </div>

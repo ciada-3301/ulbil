@@ -105,9 +105,10 @@ export default function SignUpPage() {
         <div className="text-center space-y-2">
           <div className="w-12 h-14 mx-auto relative">
             <Image
-              src="https://www.ulbil.org/images/Logo/logo_digital.png"
+              src="/images/logo_digital.png"
               alt="UIL Logo"
               fill
+              sizes="48px"
               className="object-contain"
               unoptimized
             />

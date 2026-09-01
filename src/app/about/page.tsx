@@ -25,15 +25,15 @@ export default function AboutPage() {
     <div className="py-12 space-y-16">
       
       {/* Header Banner */}
-      <section className="bg-gradient-to-b from-[#FCFBF7] to-[#FAF6ED] border-b border-[#EADBCC] py-12 px-4 sm:px-8">
+      <section className="bg-[#F5F0E8] border-b border-[#E8E0D4] py-12 px-4 sm:px-8">
         <div className="max-w-4xl mx-auto text-center space-y-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#C2592B] bg-white px-3.5 py-1 rounded-full border border-[#DFB343]/60 shadow-2xs">
+          <span className="text-sm font-bold uppercase tracking-widest text-[#D95D24] bg-white px-3.5 py-1 rounded-full border border-[#D4C5B0]/60 ">
             Heritage & Mission
           </span>
-          <h1 className="font-serif font-extrabold text-3xl sm:text-5xl text-[#221F1E]">
+          <h1 className="font-serif font-extrabold text-3xl sm:text-5xl text-[#2C2420]">
             About Uluberia Institute & Library
           </h1>
-          <p className="text-xs sm:text-sm text-[#5A504B] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#6B635D] leading-relaxed">
             A luminous cultural pillar founded in 1902 in pre-independence Bengal, standing for 125 years as a beacon of mankind, society, and culture.
           </p>
         </div>
@@ -44,10 +44,10 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
           {/* Left Column: Full History */}
-          <div className="lg:col-span-8 space-y-6 text-[#3E3835] text-xs sm:text-sm leading-relaxed">
+          <div className="lg:col-span-8 space-y-6 text-[#4A4340] text-sm sm:text-base leading-relaxed">
             
-            <div className="heritage-card p-6 sm:p-8 rounded-2xl bg-white border border-[#EADBCC] space-y-4">
-              <h2 className="font-serif font-bold text-xl text-[#221F1E] text-[#C2592B] flex items-center gap-2">
+            <div className="heritage-card p-6 sm:p-8 rounded-2xl bg-white border border-[#E8E0D4] space-y-4">
+              <h2 className="font-serif font-bold text-xl text-[#2C2420] text-[#D95D24] flex items-center gap-2">
                 <History className="w-5 h-5" />
                 <span>The Genesis: Victoria Institute & Library (1902)</span>
               </h2>
@@ -55,12 +55,12 @@ export default function AboutPage() {
                 In the year <strong>1902</strong>, in the historic riverside town of Uluberia on the banks of the Hooghly River, visionary educators, magistrates, and local scholars gathered to establish what was originally named the <em>&ldquo;Victoria Institute and Library&rdquo;</em>. Initially functioning from the second floor of the <strong>Uluberia High English School</strong>, the library was conceived as a vibrant public forum for literature, intellectual discourse, and community fellowship.
               </p>
               <p>
-                As India&apos;s freedom movement and the Bengal Renaissance gathered momentum, the institution evolved into an open, inclusive sanctuary for the entire populace—embracing teachers, youth, social reformers, and freedom fighters alike.
+                As India&apos;s freedom movement and the Bengal Renaissance gathered momentum, the institution evolved into an open, inclusive sanctuary for the entire populaceâ€”embracing teachers, youth, social reformers, and freedom fighters alike.
               </p>
             </div>
 
-            <div className="heritage-card p-6 sm:p-8 rounded-2xl bg-white border border-[#EADBCC] space-y-4">
-              <h2 className="font-serif font-bold text-xl text-[#221F1E] text-[#C2592B] flex items-center gap-2">
+            <div className="heritage-card p-6 sm:p-8 rounded-2xl bg-white border border-[#E8E0D4] space-y-4">
+              <h2 className="font-serif font-bold text-xl text-[#2C2420] text-[#D95D24] flex items-center gap-2">
                 <GraduationCap className="w-5 h-5" />
                 <span>Pioneering Uluberia College & Binapani Girls&apos; High School</span>
               </h2>
@@ -69,18 +69,18 @@ export default function AboutPage() {
               </p>
               <ul className="space-y-2 pt-1 pl-2">
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#C69214] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#B8860B] shrink-0 mt-0.5" />
                   <span><strong>Uluberia College (Estd. 1948):</strong> The Institute&apos;s governing committee was instrumental in establishing Uluberia&apos;s first degree college to provide affordable higher education to local youth immediately following Indian Independence.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#C69214] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#B8860B] shrink-0 mt-0.5" />
                   <span><strong>Binapani Girls&apos; High School (Estd. 1955):</strong> Recognizing that women&apos;s education was paramount to social progress, the Institute&apos;s patrons spearheaded the founding of Binapani Girls&apos; High School.</span>
                 </li>
               </ul>
             </div>
 
-            <div className="heritage-card p-6 sm:p-8 rounded-2xl bg-white border border-[#EADBCC] space-y-4">
-              <h2 className="font-serif font-bold text-xl text-[#221F1E] text-[#C2592B] flex items-center gap-2">
+            <div className="heritage-card p-6 sm:p-8 rounded-2xl bg-white border border-[#E8E0D4] space-y-4">
+              <h2 className="font-serif font-bold text-xl text-[#2C2420] text-[#D95D24] flex items-center gap-2">
                 <BookOpen className="w-5 h-5" />
                 <span>The Literary Mouthpiece: &apos;Satta&apos; & Cultural Sub-Committees</span>
               </h2>
@@ -97,16 +97,16 @@ export default function AboutPage() {
           {/* Right Column: Fact Sheet & Quick Info */}
           <div className="lg:col-span-4 space-y-6">
             
-            <div className="heritage-card p-6 rounded-2xl bg-white border-2 border-[#DFB343]/60 shadow-sm space-y-4">
-              <div className="text-center pb-3 border-b border-[#EADBCC]">
-                <span className="text-3xl font-serif font-extrabold text-[#C2592B]">125</span>
-                <span className="block font-serif font-bold text-xs uppercase tracking-widest text-[#8C6D23]">
+            <div className="heritage-card p-6 rounded-2xl bg-white border-2 border-[#D4C5B0]/60 shadow-sm space-y-4">
+              <div className="text-center pb-3 border-b border-[#E8E0D4]">
+                <span className="text-3xl font-serif font-extrabold text-[#D95D24]">125</span>
+                <span className="block font-serif font-bold text-sm uppercase tracking-widest text-[#8B6508]">
                   Years of Unbroken Service
                 </span>
-                <span className="text-[11px] text-[#7A6E65]">1902 – 2027</span>
+                <span className="text-[11px] text-[#9A918A]">1902 â€“ 2027</span>
               </div>
 
-              <div className="space-y-2 text-xs text-[#3E3835]">
+              <div className="space-y-2 text-sm text-[#4A4340]">
                 <p><strong>Official Name:</strong> Uluberia Institute & Library</p>
                 <p><strong>Bengali Name:</strong> {LIBRARY_INFO.bengaliName}</p>
                 <p><strong>Founded:</strong> 1902</p>
@@ -116,18 +116,18 @@ export default function AboutPage() {
                 <p><strong>Patron Community:</strong> 4,200+ Registered Readers</p>
               </div>
 
-              <div className="pt-3 border-t border-[#EADBCC] flex flex-col gap-2">
+              <div className="pt-3 border-t border-[#E8E0D4] flex flex-col gap-2">
                 <Link
                   href="/leadership"
-                  className="w-full text-center py-2.5 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-[#D95D24] to-[#C69214] shadow-xs"
+                  className="w-full text-center py-2.5 rounded-lg text-sm font-bold text-white bg-[#D95D24] shadow-xs"
                 >
                   View Governing Body
                 </Link>
                 <a
-                  href="https://www.ulbil.org/home/About_us.pdf"
+                  href="/home/About_us.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full text-center py-2 rounded-lg text-xs font-bold text-[#8C6D23] bg-[#FCFBF7] border border-[#DFB343]"
+                  className="w-full text-center py-2 rounded-lg text-sm font-bold text-[#8B6508] bg-[#F5F0E8] border border-[#D4C5B0]"
                 >
                   Download Original Archival PDF
                 </a>
@@ -135,14 +135,14 @@ export default function AboutPage() {
             </div>
 
             {/* Operating Hours Card */}
-            <div className="heritage-card p-5 rounded-2xl bg-[#FAF7F0] border border-[#EADBCC] text-xs space-y-2">
-              <h4 className="font-serif font-bold text-sm text-[#221F1E] flex items-center gap-1.5 text-[#C2592B]">
+            <div className="heritage-card p-5 rounded-2xl bg-[#FAF7F0] border border-[#E8E0D4] text-sm space-y-2">
+              <h4 className="font-serif font-bold text-sm text-[#2C2420] flex items-center gap-1.5 text-[#D95D24]">
                 <Clock className="w-4 h-4" />
                 <span>Visiting & Reading Hours</span>
               </h4>
               <p><strong>Morning Session:</strong> {LIBRARY_INFO.timings.morning}</p>
               <p><strong>Evening Session:</strong> {LIBRARY_INFO.timings.evening}</p>
-              <p className="text-[11px] text-[#7A6E65] pt-1">Open daily throughout the year except statutory holidays.</p>
+              <p className="text-[11px] text-[#9A918A] pt-1">Open daily throughout the year except statutory holidays.</p>
             </div>
 
           </div>
