@@ -19,7 +19,7 @@
 
 # production
 /build
-
+/old_site_codebase
 # misc
 .DS_Store
 *.pem
