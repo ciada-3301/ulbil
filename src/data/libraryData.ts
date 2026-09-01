@@ -91,9 +91,9 @@ export const EMINENT_PERSONS: EminentPerson[] = [
     designation: "Hon'ble Member of the Legislative Assembly (MLA)",
     subDesignation: 'Govt. of West Bengal & Eminent Social Reformer',
     roleInLibrary: 'Life-Member, Uluberia Institute & Library',
-    image: 'https://www.ulbil.org/files/contents/sri_pulok_roy.jpg',
+    image: '/files/contents/sri_pulok_roy.jpg',
     message: "Uluberia Institute and Library, a prestigious institution rich with eminent personalities from Uluberia's unique art, culture, literature, and education, marks a glorious 125-year chapter. This institution, which has always been vibrant with the comings and goings of cultured and talented people from various professions, is a prominent symbol of social consciousness and social values. I hope that in the days to come, this institution, radiating Bengali culture, will become even more accepted and cherished by the new generation in the field of balanced education and culture.",
-    fullMessageUrl: 'https://www.ulbil.org/files/contents/Sri%20Pulok%20Roy.pdf'
+    fullMessageUrl: '/files/contents/Sri%20Pulok%20Roy.pdf'
   },
   {
     id: 'sri-abhay-kumar-das',
@@ -101,9 +101,9 @@ export const EMINENT_PERSONS: EminentPerson[] = [
     designation: "Hon'ble Chairman, Uluberia Municipality",
     subDesignation: 'Eminent Personality & Social Worker',
     roleInLibrary: 'Life-Member, Uluberia Institute & Library',
-    image: 'https://www.ulbil.org/files/contents/sri_abhay_das.jpg',
+    image: '/files/contents/sri_abhay_das.jpg',
     message: "Uluberia Institute and Library, a centre of education and culture in the historic city of Uluberia flourished by Job Charnock, is one of the region's most prominent heritage structures. This institution played a pioneering role in the establishment of two of Uluberia's most renowned educational institutions, Uluberia College and Binapani Girls' High School. It preserves the culture of Bengal while paying tribute to great thinkers and showcasing innovative ideas.",
-    fullMessageUrl: 'https://www.ulbil.org/files/contents/Sri%20Abhay%20Kumar%20Das.pdf'
+    fullMessageUrl: '/files/contents/Sri%20Abhay%20Kumar%20Das.pdf'
   },
   {
     id: 'sri-manas-kumar-mondal',
@@ -111,9 +111,9 @@ export const EMINENT_PERSONS: EminentPerson[] = [
     designation: "Hon'ble Sub-Divisional Officer (SDO)",
     subDesignation: 'Uluberia Sub-Division, Uluberia, Howrah, W.B.',
     roleInLibrary: 'Ex-Officio President, Uluberia Institute & Library',
-    image: 'https://www.ulbil.org/files/contents/shri_manas_kumar_mandal_sdo_uluberia.jpg',
+    image: '/files/contents/shri_manas_kumar_mandal_sdo_uluberia.jpg',
     message: "The institution that emerged in 1902 as the Victoria Institute and Library has, after bearing witness to more than a century of history, become the Uluberia Institute and Library, standing proudly at the heart of Uluberia town. What was once primarily a meeting place for civic leaders has today become one of the most well-known centres of Uluberia's cultural landscape. This institution is considered a hallowed ground for history, education, culture, art, and literature.",
-    fullMessageUrl: 'https://www.ulbil.org/files/contents/Sri%20Manas%20Kumar%20Mondal.pdf'
+    fullMessageUrl: '/files/contents/Sri%20Manas%20Kumar%20Mondal.pdf'
   },
   {
     id: 'sri-siddhartha-das',
@@ -121,9 +121,9 @@ export const EMINENT_PERSONS: EminentPerson[] = [
     designation: 'General Secretary',
     subDesignation: 'Governing Council',
     roleInLibrary: 'Secretary, Uluberia Institute & Library',
-    image: 'https://www.ulbil.org/files/contents/siddhartha_das.jpg',
+    image: '/files/contents/siddhartha_das.jpg',
     message: "At the vibrant heart of Uluberia stands the Uluberia Institute and Library—a century-old sanctuary where art, learning, and culture are woven into one enduring tapestry. Nurtured through the fellowship of Uluberia's many enlightened minds and eminent personalities, this institution has blossomed into a living symbol of our shared social and cultural values, guided by eight dedicated sub-committees.",
-    fullMessageUrl: 'https://www.ulbil.org/files/contents/Sri%20Siddhartha%20Das.pdf'
+    fullMessageUrl: '/files/contents/Sri%20Siddhartha%20Das.pdf'
   },
   {
     id: 'sri-barun-kumar-samui',
@@ -131,9 +131,9 @@ export const EMINENT_PERSONS: EminentPerson[] = [
     designation: 'Working President',
     subDesignation: 'Executive Committee',
     roleInLibrary: 'Working President, Uluberia Institute & Library',
-    image: 'https://www.ulbil.org/files/contents/barun_kumar_samui.jpg',
+    image: '/files/contents/barun_kumar_samui.jpg',
     message: "Today is a day of great glory. With the celebration of the birth days of scholars, we also observe various cultural programmes and perform different social duties. Let's move forward with the library on a better path—focus on enhancing digital services, leveraging our library as a community hub, forming strategic partnerships, and innovating with new educational programming.",
-    fullMessageUrl: 'https://www.ulbil.org/files/contents/Sri%20Barun%20Kumar%20Samui.pdf'
+    fullMessageUrl: '/files/contents/Sri%20Barun%20Kumar%20Samui.pdf'
   },
   {
     id: 'dr-akram-hossain',
@@ -141,9 +141,9 @@ export const EMINENT_PERSONS: EminentPerson[] = [
     designation: 'Eminent Scholar, Professor & Author',
     subDesignation: 'Renowned Literary Figure',
     roleInLibrary: 'Life-Member, Uluberia Institute & Library',
-    image: 'https://www.ulbil.org/files/contents/dr_akram_hossain.jpg',
+    image: '/files/contents/dr_akram_hossain.jpg',
     message: "Since its establishment in 1902 in pre-independence Bengal, Uluberia Institute and Library has advanced progressively forward leaving behind a trail of activities multifoliate and multivalent and holding aloft the mottos of 'mankind, society and culture'. The young ones are urged to fare forward, forge ahead and contribute their mite to the intellectual development of Howrah.",
-    fullMessageUrl: 'https://www.ulbil.org/files/contents/Prof%20Dr%20Akram%20Hossain.pdf'
+    fullMessageUrl: '/files/contents/Prof%20Dr%20Akram%20Hossain.pdf'
   },
   {
     id: 'sri-ranjit-kumar-raut',
@@ -151,9 +151,9 @@ export const EMINENT_PERSONS: EminentPerson[] = [
     designation: 'Eminent Artist & Poet',
     subDesignation: 'Cultural Columnist',
     roleInLibrary: 'Life-Member, Uluberia Institute & Library',
-    image: 'https://www.ulbil.org/files/contents/sri_ranjit_kumar_raut.jpg',
+    image: '/files/contents/sri_ranjit_kumar_raut.jpg',
     message: "Nestled in the very heart of the historic town of Uluberia, the Uluberia Institute and Library stand today, after a long and illustrious journey, as one of the foremost institutions devoted to the pursuit of art, literature, culture, and social responsibility. As this century-old, light-bearing institution steps into its 125th Quasquicentennial milestone, it remains an enduring legacy.",
-    fullMessageUrl: 'https://www.ulbil.org/files/contents/Sri%20Ranjit%20Kumar%20Raut.pdf'
+    fullMessageUrl: '/files/contents/Sri%20Ranjit%20Kumar%20Raut.pdf'
   },
   {
     id: 'smt-benu-banerjee',
@@ -161,9 +161,9 @@ export const EMINENT_PERSONS: EminentPerson[] = [
     designation: 'Eminent Retired Teacher & Author',
     subDesignation: 'Associated with Institute since 1968',
     roleInLibrary: 'Life-Member, Uluberia Institute & Library',
-    image: 'https://www.ulbil.org/files/contents/smt._benu_banerjee.jpg',
+    image: '/files/contents/smt._benu_banerjee.jpg',
     message: "ULUBERIA INSTITUTE & LIBRARY: A TIMELESS JOURNEY (1902–2027). My association with this glorious institution spans over half a century (1968–Present), and in that long journey, I have had the privilege of witnessing its many transformations from very close quarters. Through the passage of time, different dedicated personalities have shouldered its responsibility, keeping pace with the needs of their era.",
-    fullMessageUrl: 'https://www.ulbil.org/files/contents/Smt.%20Benu%20Banerjee.pdf'
+    fullMessageUrl: '/files/contents/Smt.%20Benu%20Banerjee.pdf'
   }
 ];
 
@@ -321,7 +321,7 @@ export const RECENT_NOTICES: Notice[] = [
     date: 'February 2026',
     category: 'Anniversary',
     isNew: true,
-    pdfUrl: 'https://www.ulbil.org/home/About_us.pdf'
+    pdfUrl: '/home/About_us.pdf'
   },
   {
     id: 'n-02',
@@ -329,7 +329,7 @@ export const RECENT_NOTICES: Notice[] = [
     date: 'January 2026',
     category: 'Notice',
     isNew: true,
-    pdfUrl: 'https://www.ulbil.org/home/Administrtion.jpg'
+    pdfUrl: '/home/Administrtion.jpg'
   },
   {
     id: 'n-03',
@@ -337,7 +337,7 @@ export const RECENT_NOTICES: Notice[] = [
     date: 'December 2025',
     category: 'Event',
     isNew: false,
-    pdfUrl: 'https://www.ulbil.org/files/news/newsletter.pdf'
+    pdfUrl: '/files/news/newsletter.pdf'
   },
   {
     id: 'n-04',
@@ -345,7 +345,7 @@ export const RECENT_NOTICES: Notice[] = [
     date: 'November 2025',
     category: 'Circular',
     isNew: false,
-    pdfUrl: 'https://www.ulbil.org/home/Digitalised_Documents_of_Uluberia_Institute_&_Library.pdf'
+    pdfUrl: '/home/Digitalised_Documents_of_Uluberia_Institute_&_Library.pdf'
   },
   {
     id: 'n-05',
@@ -353,23 +353,36 @@ export const RECENT_NOTICES: Notice[] = [
     date: 'January 2026',
     category: 'Circular',
     isNew: false,
-    pdfUrl: 'https://www.ulbil.org/home/Publications.pdf'
+    pdfUrl: '/home/Publications.pdf'
   }
 ];
 
 export const GALLERY_SLIDES = [
-  { id: 1, title: 'Historical Library Facade & Heritage Arch', year: 'Archival Collection', url: 'https://www.ulbil.org/images/Banner/2.jpg', category: 'Heritage' },
-  { id: 2, title: 'Annual Cultural Festival & Dignitaries Felicitation', year: 'Annual Ceremony', url: 'https://www.ulbil.org/images/Banner/3.jpg', category: 'Events' },
-  { id: 3, title: 'Children Summer Drama & Art Workshop', year: 'Youth Academy', url: 'https://www.ulbil.org/images/Banner/4.jpg', category: 'Workshops' },
-  { id: 4, title: 'Central Reading Room & Rare Manuscript Desk', year: 'Reading Halls', url: 'https://www.ulbil.org/images/Banner/5.jpg', category: 'Library' },
-  { id: 5, title: 'Basanta Utsab & Spring Literary Gathering', year: 'Festival of Spring', url: 'https://www.ulbil.org/images/Banner/6.jpg', category: 'Events' },
-  { id: 6, title: 'Book Fair & Commemorative Souvenir Release', year: 'Publication Desk', url: 'https://www.ulbil.org/images/Banner/7.jpg', category: 'Publications' },
-  { id: 7, title: 'Seminar on Bengal Literature & Social Reform', year: 'Academic Wing', url: 'https://www.ulbil.org/images/Banner/8.jpg', category: 'Seminars' },
-  { id: 8, title: 'Student Study Wing & Competitive Exam Corner', year: 'Student Services', url: 'https://www.ulbil.org/images/Banner/9.jpg', category: 'Library' },
-  { id: 9, title: 'Prize Distribution for Youth Recitation & Drama', year: 'Cultural Wing', url: 'https://www.ulbil.org/images/Banner/10.jpg', category: 'Events' },
-  { id: 10, title: 'Historical Archive & Minutes Register from 1902', year: 'Archives', url: 'https://www.ulbil.org/images/Banner/11.jpg', category: 'Heritage' },
-  { id: 11, title: 'Commemorative Exhibition for 125 Years', year: 'Jubilee 125', url: 'https://www.ulbil.org/images/Banner/12.jpg', category: 'Jubilee' },
-  { id: 12, title: 'Executive Committee & Patron Assembly', year: 'Governing Council', url: 'https://www.ulbil.org/images/Banner/13.jpg', category: 'Council' }
+  { id: 1, title: 'Historical Library Facade & Heritage Arch', year: 'Archival Collection', url: '/images/Banner/2.jpg', category: 'Anniversary Celebrations' },
+  { id: 2, title: 'Annual Cultural Festival & Dignitaries Felicitation', year: 'Annual Ceremony', url: '/images/Banner/3.jpg', category: 'Cultural Events' },
+  { id: 3, title: 'Children Summer Drama & Art Workshop', year: 'Youth Academy', url: '/images/Banner/4.jpg', category: 'Youth Drama' },
+  { id: 4, title: 'Central Reading Room & Rare Manuscript Desk', year: 'Reading Halls', url: '/images/Banner/5.jpg', category: 'Library Reading Room' },
+  { id: 5, title: 'Basanta Utsab & Spring Literary Gathering', year: 'Festival of Spring', url: '/images/Banner/6.jpg', category: 'Cultural Events' },
+  { id: 6, title: 'Book Fair & Commemorative Souvenir Release', year: 'Publication Desk', url: '/images/Banner/7.jpg', category: 'Cultural Events' },
+  { id: 7, title: 'Seminar on Bengal Literature & Social Reform', year: 'Academic Wing', url: '/images/Banner/8.jpg', category: 'Anniversary Celebrations' },
+  { id: 8, title: 'Student Study Wing & Competitive Exam Corner', year: 'Student Services', url: '/images/Banner/9.jpg', category: 'Library Reading Room' },
+  { id: 9, title: 'Prize Distribution for Youth Recitation & Drama', year: 'Cultural Wing', url: '/images/Banner/10.jpg', category: 'Youth Drama' },
+  { id: 10, title: 'Historical Archive & Minutes Register from 1902', year: 'Archives', url: '/images/Banner/11.jpg', category: 'Centenary Jubilee' },
+  { id: 11, title: 'Commemorative Exhibition for 125 Years', year: 'Jubilee 125', url: '/images/Banner/12.jpg', category: 'Centenary Jubilee' },
+  { id: 12, title: 'Executive Committee & Patron Assembly', year: 'Governing Council', url: '/images/Banner/13.jpg', category: 'Centenary Jubilee' },
+  { id: 13, title: 'Historic Cultural Performance at Library Auditorium', year: 'Heritage Gallery', url: '/images/Gallery/slide_01.jpg', category: 'Cultural Events' },
+  { id: 14, title: 'Dignitary Felicitation & Centenary Celebration', year: 'Heritage Gallery', url: '/images/Gallery/slide_02.jpg', category: 'Anniversary Celebrations' },
+  { id: 15, title: 'Youth Classical Music Recital & Drama', year: 'Youth Academy', url: '/images/Gallery/slide_03.jpg', category: 'Youth Drama' },
+  { id: 16, title: 'Literary Conference on Rabindranath & Bengal Renaissance', year: 'Symposium', url: '/images/Gallery/slide_04.jpg', category: 'Cultural Events' },
+  { id: 17, title: 'Library Book Fair & Publisher Exhibition', year: 'Book Fair', url: '/images/Gallery/slide_05.jpg', category: 'Cultural Events' },
+  { id: 18, title: 'Annual Children Art & Painting Exhibition', year: 'Art Wing', url: '/images/Gallery/slide_06.jpg', category: 'Youth Drama' },
+  { id: 19, title: 'Felicitation of Senior Life Members & Patrons', year: 'Patron Assembly', url: '/images/Gallery/slide_07.jpg', category: 'Anniversary Celebrations' },
+  { id: 20, title: 'Library Study Hall & Research Stacks Consultation', year: 'Reading Hall', url: '/images/Gallery/slide_08.jpg', category: 'Library Reading Room' },
+  { id: 21, title: 'Basanta Utsab Folk Performance & Songs', year: 'Spring Festival', url: '/images/Gallery/slide_09.jpg', category: 'Cultural Events' },
+  { id: 22, title: 'Commemorative Souvenir Unveiling by Hon. MLA', year: 'Publication', url: '/images/Gallery/slide_10.jpg', category: 'Anniversary Celebrations' },
+  { id: 23, title: 'Memorial Lecture by Distinguished Scholars', year: 'Memorial Wing', url: '/images/Gallery/slide_11.jpg', category: 'Cultural Events' },
+  { id: 24, title: 'Inter-School Debate Championship Finals', year: 'Youth Academy', url: '/images/Gallery/slide_12.jpg', category: 'Youth Drama' },
+  { id: 25, title: 'Library Founding Day Flag Hoisting & Procession', year: 'Founding Day', url: '/images/Gallery/slide_13.jpg', category: 'Anniversary Celebrations' }
 ];
 
 export interface MembershipTier {

@@ -6,18 +6,13 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useSeniorMode } from '@/components/providers/SeniorModeProvider';
 import { 
-  Sparkles, 
   Clock, 
   Phone, 
   Menu, 
   X, 
-  BookOpen, 
-  Award,
-  ChevronRight,
-  HeartHandshake,
   User,
-  ShieldCheck,
-  QrCode
+  HeartHandshake,
+  Glasses
 } from 'lucide-react';
 import { LIBRARY_INFO } from '@/data/libraryData';
 
@@ -26,25 +21,20 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [language, setLanguage] = useState<'EN' | 'BN'>('EN');
-  const [timeStr, setTimeStr] = useState<string>('');
-
   const { seniorMode, toggleSeniorMode } = useSeniorMode();
 
   useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTimeStr(now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit' }));
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 15);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -65,20 +55,14 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
       {/* Top Heritage Utility Bar (Ultra-slim) */}
-      <div className="bg-[#FAF7F0] border-b border-[#EADBCC] text-[11px] text-[#5A504B] py-0.5 px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          {/* Left: Timings & Real-time Clock */}
+      <div className="bg-[#FAF7F0] border-b border-[#E8E0D4] text-[11px] text-[#6B635D] py-0.5 px-5 sm:px-8 lg:px-12 xl:px-16">
+        <div className="w-full max-w-[1560px] mx-auto flex flex-wrap items-center justify-between gap-2">
+          {/* Left: Timings */}
           <div className="flex items-center gap-3 flex-wrap">
-            <div className="flex items-center gap-1 font-medium text-[#C2592B]">
+            <div className="flex items-center gap-1 font-medium text-[#D95D24]">
               <Clock className="w-3 h-3" />
               <span>Timings: {LIBRARY_INFO.timings.morning} & {LIBRARY_INFO.timings.evening}</span>
             </div>
-            {timeStr && (
-              <span className="hidden md:inline text-neutral-300">|</span>
-            )}
-            {timeStr && (
-              <span className="hidden md:inline font-mono text-[#8C6D23]">Live: {timeStr}</span>
-            )}
           </div>
 
           {/* Right: Senior Reader Mode, Phone & Language Switcher */}
@@ -87,18 +71,19 @@ export default function Navbar() {
               onClick={toggleSeniorMode}
               className={`px-1.5 py-0.5 rounded text-[10px] font-bold transition-all flex items-center gap-1 cursor-pointer ${
                 seniorMode 
-                  ? 'bg-[#C2592B] text-white shadow-2xs' 
-                  : 'bg-white border border-[#DFB343] text-[#8C6D23] hover:bg-[#FEF5ED]'
+                  ? 'bg-[#D95D24] text-white' 
+                  : 'bg-white border border-[#B8860B] text-[#8B6508] hover:bg-[#FEF0EA]'
               }`}
               title="Toggle Large Text / Senior Reader Accessibility"
             >
-              <span>👓 {seniorMode ? 'সহজ পাঠ (ON)' : 'সহজ পাঠ'}</span>
+              <Glasses className="w-3 h-3" />
+              <span>{seniorMode ? 'সহজ পাঠ (ON)' : 'সহজ পাঠ'}</span>
             </button>
 
             <span className="hidden sm:inline text-neutral-300">|</span>
 
-            <a href="tel:+919836330911" className="hidden sm:flex items-center gap-1 hover:text-[#C2592B] transition-colors">
-              <Phone className="w-2.5 h-2.5 text-[#C69214]" />
+            <a href="tel:+919836330911" className="hidden sm:flex items-center gap-1 hover:text-[#D95D24] transition-colors">
+              <Phone className="w-2.5 h-2.5 text-[#B8860B]" />
               <span>{LIBRARY_INFO.phone}</span>
             </a>
 
@@ -107,7 +92,7 @@ export default function Navbar() {
             <div className="flex items-center gap-2">
               <button 
                 onClick={() => setLanguage(language === 'EN' ? 'BN' : 'EN')}
-                className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-white border border-[#DFB343] text-[#8C6D23] hover:bg-[#FEF5ED] transition-all flex items-center gap-1 shadow-2xs cursor-pointer"
+                className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-white border border-[#B8860B] text-[#8B6508] hover:bg-[#FEF0EA] transition-all flex items-center gap-1 cursor-pointer"
                 title="Toggle Bengali Script"
               >
                 <span>{language === 'EN' ? 'বাংলা সংস্করণ' : 'English'}</span>
@@ -118,60 +103,55 @@ export default function Navbar() {
       </div>
 
       {/* Main Heritage Navbar */}
-      <nav className={`bg-white/95 backdrop-blur-md border-b border-[#EADBCC] transition-all duration-300 ${
-        isScrolled ? 'py-1.5 shadow-sm' : 'py-2 sm:py-2.5'
+      <nav className={`bg-white/95 backdrop-blur-md border-b border-[#E8E0D4] transition-all duration-300 ${
+        isScrolled ? 'shadow-sm' : ''
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
+        <div className="w-full max-w-[1560px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 flex items-center justify-between py-2 sm:py-2.5">
           
           {/* Brand Logo & Title */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="relative w-8 h-10 shrink-0 flex items-center justify-center p-0.5 bg-gradient-to-b from-[#FEF5ED] to-white rounded-md border border-[#DFB343]/60 shadow-2xs group-hover:border-[#C69214] transition-all">
+          <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+            <div className="relative w-8 h-10 shrink-0 flex items-center justify-center p-0.5 bg-[#FEF0EA] rounded-md border border-[#D4C5B0] transition-all">
               <Image 
-                src="https://www.ulbil.org/images/Logo/logo_digital.png" 
+                src="/images/logo_digital.png" 
                 alt="Uluberia Institute & Library Logo" 
-                width={26} 
+                width={28} 
                 height={34} 
-                className="object-contain" 
+                className="object-contain w-auto h-auto" 
                 priority
               />
             </div>
             
             <div className="flex flex-col">
-              <span className="font-serif font-bold text-sm sm:text-base tracking-tight text-[#221F1E] group-hover:text-[#C2592B] transition-colors leading-tight">
+              <span className="font-serif font-bold text-base tracking-tight text-[#2C2420] group-hover:text-[#D95D24] transition-colors leading-tight">
                 ULUBERIA INSTITUTE & LIBRARY
               </span>
-              <div className="flex items-center gap-1.5 text-[10px] text-[#7A6E65] leading-none mt-0.5">
-                <span className="font-semibold text-[#C69214]">Estd. 1902</span>
-                <span>•</span>
-                <span className="italic tracking-wider uppercase font-medium text-[#8C6D23]">
-                  {language === 'BN' ? LIBRARY_INFO.bengaliTagline : LIBRARY_INFO.tagline}
-                </span>
+              <div className="flex items-center gap-1.5 text-xs text-[#9A918A] leading-none mt-0.5">
+                <span>Estd. 1902</span>
               </div>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden xl:flex items-center gap-0.5 text-xs font-medium text-[#3E3835]">
+          <div className="hidden xl:flex items-center gap-1.5 2xl:gap-2 text-sm font-medium text-[#4A4340]">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-2 py-1 rounded-md transition-all relative ${
+                  className={`px-2.5 py-1 rounded-md transition-all relative ${
                     isActive 
-                      ? 'text-[#C2592B] font-bold bg-[#FEF5ED]' 
+                      ? 'text-[#D95D24] font-bold bg-[#FEF0EA]' 
                       : link.isHighlight 
-                        ? 'text-[#C69214] font-bold hover:bg-[#FEF5ED]' 
-                        : 'hover:text-[#C2592B] hover:bg-[#FAF7F0]'
+                        ? 'text-[#B8860B] font-bold hover:bg-[#F7F0E0]' 
+                        : 'hover:text-[#D95D24] hover:bg-[#FAF7F0]'
                   }`}
                 >
                   <span className="flex items-center gap-1">
-                    {link.isHighlight && <Sparkles className="w-2.5 h-2.5 text-[#C69214]" />}
                     {language === 'BN' ? link.bengaliLabel : link.label}
                   </span>
                   {isActive && (
-                    <span className="absolute bottom-0 left-1.5 right-1.5 h-0.5 bg-[#C2592B] rounded-full" />
+                    <span className="absolute bottom-0 left-1.5 right-1.5 h-0.5 bg-[#D95D24] rounded-full" />
                   )}
                 </Link>
               );
@@ -182,17 +162,17 @@ export default function Navbar() {
           <div className="hidden sm:flex items-center gap-2">
             <Link
               href="/auth/signin"
-              className="px-2.5 py-1.5 rounded-lg text-xs font-bold text-[#8C6D23] bg-[#FCFBF7] border border-[#DFB343] hover:bg-[#FEF5ED] hover:text-[#C2592B] transition-colors flex items-center gap-1"
+              className="px-3 py-1.5 rounded-xl text-sm font-bold text-[#D95D24] border border-[#D4C5B0] hover:bg-[#FEF0EA] transition-colors flex items-center gap-1"
             >
-              <User className="w-3 h-3 text-[#C69214]" />
+              <User className="w-4 h-4" />
               <span>Member Sign In</span>
             </Link>
 
             <Link
               href="/donate"
-              className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-[#D95D24] to-[#C69214] hover:from-[#C2592B] hover:to-[#B0800F] shadow-2xs hover:shadow-xs transition-all flex items-center gap-1 active:scale-95"
+              className="px-4 py-1.5 rounded-xl text-sm font-bold text-white bg-[#D95D24] hover:bg-[#A94314] transition-all flex items-center gap-1 active:scale-95"
             >
-              <HeartHandshake className="w-3 h-3" />
+              <HeartHandshake className="w-4 h-4" />
               <span>125th Fund</span>
             </Link>
           </div>
@@ -200,75 +180,74 @@ export default function Navbar() {
           {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="xl:hidden p-1.5 rounded-md text-[#3E3835] hover:bg-[#FAF7F0] border border-[#EADBCC] focus:outline-hidden"
+            className="xl:hidden p-1.5 rounded-md text-[#4A4340] hover:bg-[#FAF7F0] border border-[#E8E0D4] focus:outline-hidden"
             aria-label="Toggle navigation menu"
           >
-            {isOpen ? <X className="w-5 h-5 text-[#C2592B]" /> : <Menu className="w-5 h-5" />}
+            {isOpen ? <X className="w-5 h-5 text-[#D95D24]" /> : <Menu className="w-5 h-5" />}
           </button>
-
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile Full Overlay Menu */}
         {isOpen && (
-          <div className="xl:hidden bg-white border-t border-[#EADBCC] px-4 py-4 space-y-2 shadow-lg animate-in slide-in-from-top-2 duration-200">
-            <div className="grid grid-cols-2 gap-2 pb-3 border-b border-[#EADBCC]/60">
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`px-3 py-2 rounded-md text-xs font-medium transition-all ${
-                      isActive 
-                        ? 'bg-[#FEF5ED] text-[#C2592B] font-bold border-l-2 border-[#C2592B]' 
-                        : link.isHighlight
-                          ? 'bg-[#FBF4E4] text-[#C69214] font-bold'
-                          : 'text-[#3E3835] hover:bg-[#FAF7F0]'
-                    }`}
-                  >
-                    {language === 'BN' ? link.bengaliLabel : link.label}
-                  </Link>
-                );
-              })}
-            </div>
-            
-            <div className="pt-2 flex flex-col gap-2">
-              <div className="grid grid-cols-2 gap-2">
+          <div className="xl:hidden fixed inset-0 top-[60px] bg-white z-40 overflow-y-auto pb-20 animate-in slide-in-from-top-2 duration-200">
+            <div className="px-4 py-6 space-y-4">
+              <div className="grid grid-cols-1 gap-2 pb-6 border-b border-[#E8E0D4]">
+                {navLinks.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className={`px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                        isActive 
+                          ? 'bg-[#FEF0EA] text-[#D95D24] font-bold border-l-4 border-[#D95D24]' 
+                          : link.isHighlight
+                            ? 'bg-[#F7F0E0] text-[#B8860B] font-bold'
+                            : 'text-[#4A4340] hover:bg-[#FAF7F0]'
+                      }`}
+                    >
+                      {language === 'BN' ? link.bengaliLabel : link.label}
+                    </Link>
+                  );
+                })}
+              </div>
+              
+              <div className="pt-2 flex flex-col gap-3">
                 <Link
                   href="/auth/signin"
                   onClick={() => setIsOpen(false)}
-                  className="text-center py-2 rounded-lg text-xs font-bold text-[#8C6D23] bg-[#FCFBF7] border border-[#DFB343]"
+                  className="w-full text-center py-3 rounded-xl text-sm font-bold text-[#D95D24] border border-[#D4C5B0]"
                 >
                   Member Sign In
                 </Link>
                 <Link
                   href="/dashboard"
                   onClick={() => setIsOpen(false)}
-                  className="text-center py-2 rounded-lg text-xs font-bold text-[#C2592B] bg-[#FEF5ED] border border-[#C2592B]/40"
+                  className="w-full text-center py-3 rounded-xl text-sm font-bold text-[#D95D24] bg-[#FEF0EA] border border-[#D95D24]/40"
                 >
                   My Member Card
                 </Link>
-              </div>
 
-              <Link
-                href="/donate"
-                onClick={() => setIsOpen(false)}
-                className="w-full text-center py-2.5 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-[#D95D24] to-[#C69214] shadow-sm"
-              >
-                Contribute to 125th Jubilee Fund
-              </Link>
+                <Link
+                  href="/donate"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full text-center py-3 rounded-xl text-sm font-bold text-white bg-[#D95D24]"
+                >
+                  Contribute to 125th Jubilee Fund
+                </Link>
 
-              <div className="flex items-center justify-between text-[10px] text-[#7A6E65] pt-1 px-1">
-                <Link href="/librarian" onClick={() => setIsOpen(false)} className="hover:underline">
-                  Librarian Desk
-                </Link>
-                <span>•</span>
-                <Link href="/admin" onClick={() => setIsOpen(false)} className="hover:underline">
-                  Admin Portal
-                </Link>
-                <span>•</span>
-                <span>(+91) 98363 30911</span>
+                <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-[#9A918A] pt-4 px-1">
+                  <Link href="/librarian" onClick={() => setIsOpen(false)} className="hover:underline">
+                    Librarian Desk
+                  </Link>
+                  <span>•</span>
+                  <Link href="/admin" onClick={() => setIsOpen(false)} className="hover:underline">
+                    Admin Portal
+                  </Link>
+                  <span>•</span>
+                  <span>(+91) 98363 30911</span>
+                </div>
               </div>
             </div>
           </div>

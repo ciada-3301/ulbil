@@ -59,9 +59,10 @@ export default function PrintableCard({ patron }: PrintableCardProps) {
             <div className="flex items-center gap-2">
               <div className="w-7 h-9 relative shrink-0">
                 <Image
-                  src="https://www.ulbil.org/images/Logo/logo_digital.png"
+                  src="/images/logo_digital.png"
                   alt="UIL Logo"
                   fill
+                  sizes="36px"
                   className="object-contain"
                   unoptimized
                 />

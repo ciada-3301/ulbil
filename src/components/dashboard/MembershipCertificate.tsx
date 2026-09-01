@@ -65,9 +65,10 @@ export default function MembershipCertificate({ patron }: MembershipCertificateP
           <div className="flex items-center justify-center gap-3">
             <div className="w-12 h-16 relative shrink-0">
               <Image
-                src="https://www.ulbil.org/images/Logo/logo_digital.png"
+                src="/images/logo_digital.png"
                 alt="UIL Emblem"
                 fill
+                sizes="48px"
                 className="object-contain"
                 unoptimized
               />

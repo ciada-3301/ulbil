@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Cinzel, Yatra_One } from "next/font/google";
+import { Playfair_Display, Source_Sans_3, Yatra_One } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SeniorModeProvider } from "@/components/providers/SeniorModeProvider";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-serif",
   display: "swap",
 });
 
-const cinzel = Cinzel({
+const sourceSans = Source_Sans_3({
   subsets: ["latin"],
-  variable: "--font-serif",
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Uluberia Institute & Library" }],
   icons: {
-    icon: "https://www.ulbil.org/images/Logo/logo_digital.png",
-    shortcut: "https://www.ulbil.org/images/Logo/logo_digital.png",
-    apple: "https://www.ulbil.org/images/Logo/logo_digital.png",
+    icon: "/images/jubilee_125_logo.jpg",
+    shortcut: "/favicon.ico",
+    apple: "/images/jubilee_125_logo.jpg",
   },
   openGraph: {
     title: "Uluberia Institute & Library (Estd. 1902) — 125th Anniversary",
@@ -69,7 +69,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Library",
   "name": "Uluberia Institute & Library",
-  "alternateName": "উলুবেড়িয়া ইনস্টিটিউট ও লাইব্রেরি",
+  "alternateName": "উলুবেড়িয়া ইনস্টিটিউট ও লাইব্রেরি",
   "url": "https://ulbil.org",
   "logo": "https://www.ulbil.org/images/Logo/logo_digital.png",
   "foundingDate": "1902",
@@ -105,14 +105,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${plusJakarta.variable} ${cinzel.variable} ${yatraOne.variable} scroll-smooth`}>
+    <html lang="en" className={`${sourceSans.variable} ${playfair.variable} ${yatraOne.variable} scroll-smooth`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col font-sans bg-[#FCFBF7] text-[#221F1E] antialiased selection:bg-[#FEF0EA] selection:text-[#D95D24]">
+      <body className="min-h-screen flex flex-col font-sans bg-[#FAF7F0] text-[#2C2420] antialiased selection:bg-[#FEF0EA] selection:text-[#D95D24]">
         <SeniorModeProvider>
           <Navbar />
           <main className="flex-1">
@@ -124,4 +124,3 @@ export default function RootLayout({
     </html>
   );
 }
-
