@@ -45,7 +45,7 @@ export default function HeroSection() {
             </div>
 
             {/* Main Grand Title */}
-            <h1 className="font-indic text-3.5xl sm:text-4xl lg:text-[44px] xl:text-[52px] 2xl:text-[58px] text-[#2C2420] tracking-wide leading-[1.12] font-bold">
+            <h1 className="font-serif text-3.5xl sm:text-4xl lg:text-[44px] xl:text-[52px] 2xl:text-[58px] text-[#2C2420] tracking-tight leading-[1.14] font-bold">
               A Century & A Quarter of <br />
               <span className="bg-gradient-to-r from-[#D95D24] via-[#C2592B] to-[#A94314] bg-clip-text text-transparent">
                 Knowledge, Culture & Community
