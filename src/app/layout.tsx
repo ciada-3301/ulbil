@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Source_Sans_3, Yatra_One } from "next/font/google";
+import { Playfair_Display, Source_Sans_3, Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -17,9 +17,8 @@ const sourceSans = Source_Sans_3({
   display: "swap",
 });
 
-const yatraOne = Yatra_One({
-  weight: "400",
-  subsets: ["latin", "devanagari"],
+const notoSerifBengali = Noto_Serif_Bengali({
+  subsets: ["bengali"],
   variable: "--font-indic",
   display: "swap",
 });
@@ -105,7 +104,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sourceSans.variable} ${playfair.variable} ${yatraOne.variable} scroll-smooth`}>
+    <html lang="en" className={`${sourceSans.variable} ${playfair.variable} ${notoSerifBengali.variable} scroll-smooth`}>
       <head>
         <script
           type="application/ld+json"
