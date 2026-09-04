@@ -34,7 +34,7 @@ export default function AnniversaryPage() {
             <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-2xl p-2 bg-white border-2 border-[#B8860B] shadow-lg flex items-center justify-center">
               <Image
                 src="/images/jubilee_125_logo.jpg"
-                alt="à¦†à¦²à§‹à¦° à¦ªà¦¥à§‡-à§§à§¨à§« (à§§à§¯à§¦à§¨-à§¨à§¦à§¨à§¬) - 125th Jubilee Official Logo"
+                alt="আলোর পথে-১২৫ (১৯০২-২০২৬) - 125th Jubilee Official Logo"
                 fill
                 sizes="160px"
                 className="object-contain p-2 rounded-2xl"
@@ -45,10 +45,10 @@ export default function AnniversaryPage() {
 
           <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white border border-[#B8860B] text-sm font-bold text-[#D95D24] shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-[#B8860B]" />
-            <span>à¦†à¦²à§‹à¦° à¦ªà¦¥à§‡-à§§à§¨à§« (à§§à§¯à§¦à§¨-à§¨à§¦à§¨à§¬) â€¢ Quasquicentennial Jubilee</span>
+            <span>আলোর পথে-১২৫ (১৯০২-২০২৬) • Quasquicentennial Jubilee</span>
           </div>
 
-          <h1 className="font-indic text-3xl sm:text-5xl text-[#2C2420] leading-tight">
+          <h1 className="font-serif font-bold text-3xl sm:text-5xl text-[#2C2420] leading-tight">
             125 Years of Illuminating <br />
             <span className="text-brass-gradient">Mankind, Society & Culture</span>
           </h1>
