@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SeniorModeProvider } from "@/components/providers/SeniorModeProvider";
+import MaintenanceScreen from "@/components/maintenance/MaintenanceScreen";
+import { isMaintenanceActive } from "@/config/maintenance";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -103,6 +105,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const maintenance = isMaintenanceActive();
+
   return (
     <html lang="en" className={`${sourceSans.variable} ${playfair.variable} ${notoSerifBengali.variable} scroll-smooth`}>
       <head>
@@ -112,13 +116,17 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col font-sans bg-[#FAF7F0] text-[#2C2420] antialiased selection:bg-[#FEF0EA] selection:text-[#D95D24]">
-        <SeniorModeProvider>
-          <Navbar />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </SeniorModeProvider>
+        {maintenance ? (
+          <MaintenanceScreen />
+        ) : (
+          <SeniorModeProvider>
+            <Navbar />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </SeniorModeProvider>
+        )}
       </body>
     </html>
   );
