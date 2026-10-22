@@ -106,16 +106,6 @@ export const EMINENT_PERSONS: EminentPerson[] = [
     fullMessageUrl: '/files/contents/Sri%20Abhay%20Kumar%20Das.pdf'
   },
   {
-    id: 'sri-manas-kumar-mondal',
-    name: 'Sri Manas Kumar Mondal',
-    designation: "Hon'ble Sub-Divisional Officer (SDO)",
-    subDesignation: 'Uluberia Sub-Division, Uluberia, Howrah, W.B.',
-    roleInLibrary: 'Ex-Officio President, Uluberia Institute & Library',
-    image: '/files/contents/shri_manas_kumar_mandal_sdo_uluberia.jpg',
-    message: "The institution that emerged in 1902 as the Victoria Institute and Library has, after bearing witness to more than a century of history, become the Uluberia Institute and Library, standing proudly at the heart of Uluberia town. What was once primarily a meeting place for civic leaders has today become one of the most well-known centres of Uluberia's cultural landscape. This institution is considered a hallowed ground for history, education, culture, art, and literature.",
-    fullMessageUrl: '/files/contents/Sri%20Manas%20Kumar%20Mondal.pdf'
-  },
-  {
     id: 'sri-siddhartha-das',
     name: 'Sri Siddhartha Das',
     designation: 'General Secretary',
