@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/librarian', '/admin', '/dashboard/api/']
+      disallow: ['/librarian', '/admin', '/dashboard/api/', '/emails', '/api/emails/']
     },
     sitemap: 'https://ulbil.org/sitemap.xml'
   };

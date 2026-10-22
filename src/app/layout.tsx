@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Source_Sans_3, Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import { SeniorModeProvider } from "@/components/providers/SeniorModeProvider";
+import LayoutShell from "@/components/layout/LayoutShell";
 import MaintenanceScreen from "@/components/maintenance/MaintenanceScreen";
 import { isMaintenanceActive } from "@/config/maintenance";
 
@@ -119,13 +117,9 @@ export default function RootLayout({
         {maintenance ? (
           <MaintenanceScreen />
         ) : (
-          <SeniorModeProvider>
-            <Navbar />
-            <main className="flex-1">
-              {children}
-            </main>
-            <Footer />
-          </SeniorModeProvider>
+          <LayoutShell>
+            {children}
+          </LayoutShell>
         )}
       </body>
     </html>
