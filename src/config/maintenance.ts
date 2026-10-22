@@ -14,7 +14,7 @@
  *   NEXT_PUBLIC_MAINTENANCE_MODE=true / false
  */
 
-export const MAINTENANCE_MODE: boolean = true;
+export const MAINTENANCE_MODE: boolean = false;
 
 export function isMaintenanceActive(): boolean {
   if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE !== undefined) {
