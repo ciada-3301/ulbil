@@ -138,7 +138,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4.5 h-4.5 text-[#B8860B] shrink-0" />
-                <a href="mailto:ulu.ins.library@ulbil.org" className="hover:text-[#D95D24]">{LIBRARY_INFO.emails[0]}</a>
+                <a href="mailto:ulu.ins.library@gmail.com" className="hover:text-[#D95D24]">ulu.ins.library@gmail.com</a>
               </li>
             </ul>
 

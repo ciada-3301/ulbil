@@ -107,8 +107,8 @@ export default function MaintenanceScreen() {
                 <Mail className="w-4 h-4 text-[#D95D24] shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-[#2C2420] block">Email Inquiries:</strong>
-                  <a href="mailto:ulu.ins.library@ulbil.org" className="hover:text-[#D95D24] transition-colors">
-                    ulu.ins.library@ulbil.org
+                  <a href="mailto:ulu.ins.library@gmail.com" className="hover:text-[#D95D24] transition-colors">
+                    ulu.ins.library@gmail.com
                   </a>
                 </div>
               </div>
