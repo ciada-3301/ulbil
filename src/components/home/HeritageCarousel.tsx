@@ -21,6 +21,7 @@ export default function HeritageCarousel() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const thumbnailContainerRef = useRef<HTMLDivElement | null>(null);
 
   const slides = GALLERY_SLIDES;
 
@@ -35,6 +36,15 @@ export default function HeritageCarousel() {
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
   };
+
+  useEffect(() => {
+    if (thumbnailContainerRef.current) {
+      const activeThumb = thumbnailContainerRef.current.children[currentIndex] as HTMLElement | undefined;
+      if (activeThumb) {
+        activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  }, [currentIndex]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -171,7 +181,10 @@ export default function HeritageCarousel() {
 
           {/* Compact Thumbnail Strip */}
           <div className="bg-[#1C1816] p-2.5 sm:p-3 border-t border-[#D4C5B0]/30">
-            <div className="flex items-center gap-2 overflow-x-auto pb-0.5 scrollbar-thin scrollbar-thumb-[#B8860B]/40">
+            <div 
+              ref={thumbnailContainerRef}
+              className="flex items-center gap-2 overflow-x-auto pb-0.5 scrollbar-thin scrollbar-thumb-[#B8860B]/40 scroll-smooth"
+            >
               {slides.map((slide, idx) => {
                 const isActive = idx === currentIndex;
                 return (
