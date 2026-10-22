@@ -136,9 +136,34 @@ export default function Footer() {
                 <Phone className="w-4.5 h-4.5 text-[#B8860B] shrink-0" />
                 <a href="tel:+919836330911" className="hover:text-[#D95D24] font-medium">{LIBRARY_INFO.phone}</a>
               </li>
-              <li className="flex items-center gap-2.5">
-                <Mail className="w-4.5 h-4.5 text-[#B8860B] shrink-0" />
-                <a href="mailto:ulu.ins.library@gmail.com" className="hover:text-[#D95D24]">ulu.ins.library@gmail.com</a>
+              <li className="flex items-start gap-2.5">
+                <Mail className="w-4.5 h-4.5 text-[#B8860B] shrink-0 mt-0.5" />
+                <div className="space-y-1.5 text-xs">
+                  <div>
+                    <span className="text-[#9A918A] block text-[11px] leading-tight">General Inquiries:</span>
+                    <a href="mailto:ulu.ins.library@gmail.com" className="hover:text-[#D95D24] text-[#4A4340] font-medium transition-colors">
+                      ulu.ins.library@gmail.com
+                    </a>
+                  </div>
+                  <div>
+                    <span className="text-[#9A918A] block text-[11px] leading-tight">General Secretary:</span>
+                    <a href="mailto:secretary@ulbil.com" className="hover:text-[#D95D24] text-[#4A4340] font-medium transition-colors">
+                      secretary@ulbil.com
+                    </a>
+                  </div>
+                  <div>
+                    <span className="text-[#9A918A] block text-[11px] leading-tight">IT &amp; Web Desk:</span>
+                    <a href="mailto:it@ulbil.com" className="hover:text-[#D95D24] text-[#4A4340] font-medium transition-colors">
+                      it@ulbil.com
+                    </a>
+                  </div>
+                  <div>
+                    <span className="text-[#9A918A] block text-[11px] leading-tight">Satta Literary Council:</span>
+                    <a href="mailto:satta@ulbil.com" className="hover:text-[#D95D24] text-[#4A4340] font-medium transition-colors">
+                      satta@ulbil.com
+                    </a>
+                  </div>
+                </div>
               </li>
             </ul>
 

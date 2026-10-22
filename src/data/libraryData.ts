@@ -62,7 +62,12 @@ export const LIBRARY_INFO = {
   establishedDate: 'Established in 1902 (originally as Victoria Institute & Library)',
   address: 'Uluberia, Howrah, West Bengal - 711315, India',
   phone: '(+91) 98363 30911',
-  emails: ['ulu.ins.library@gmail.com', 'ulu.ins.library@ulbil.org'],
+  emails: [
+    'ulu.ins.library@gmail.com',
+    'secretary@ulbil.com',
+    'it@ulbil.com',
+    'satta@ulbil.com'
+  ],
   website: 'https://ulbil.org',
   timings: {
     morning: '9:00 AM – 12:00 PM',
