@@ -36,7 +36,7 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <div className="w-12 h-14 p-1 bg-white rounded-xl border border-[#D4C5B0] flex items-center justify-center shrink-0">
                 <Image 
-                  src="https://www.ulbil.org/images/Logo/logo_digital.png" 
+                  src="/images/Logo/logo_digital.png" 
                   alt="Uluberia Institute & Library Logo" 
                   width={38} 
                   height={50} 

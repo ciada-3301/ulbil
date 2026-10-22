@@ -282,7 +282,7 @@ export default function MemberDashboardPage() {
               
               <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none w-64 h-64">
                 <Image
-                  src="https://www.ulbil.org/images/Logo/logo_digital.png"
+                  src="/images/Logo/logo_digital.png"
                   alt="Watermark"
                   fill
                   className="object-contain"
@@ -295,7 +295,7 @@ export default function MemberDashboardPage() {
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-11 relative shrink-0">
                     <Image
-                      src="https://www.ulbil.org/images/Logo/logo_digital.png"
+                      src="/images/Logo/logo_digital.png"
                       alt="UIL Logo"
                       fill
                       className="object-contain"
