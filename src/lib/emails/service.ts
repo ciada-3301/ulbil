@@ -63,9 +63,14 @@ export async function sendDepartmentEmail(payload: SendEmailPayload): Promise<Se
 
       if (resendResponse.error) {
         console.error('Resend API returned error:', resendResponse.error);
+        const msg = resendResponse.error.message || '';
+        let userFriendlyError = msg;
+        if (msg.toLowerCase().includes('not verified')) {
+          userFriendlyError = `Resend Domain Not Verified: ${msg}. If DNS records were added in Hostinger, please click 'Verify' in your Resend Dashboard (https://resend.com/domains) or wait for DNS propagation.`;
+        }
         return {
           success: false,
-          error: resendResponse.error.message || 'Resend failed to deliver the message.',
+          error: userFriendlyError,
           mode: 'resend-live'
         };
       }

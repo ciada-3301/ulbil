@@ -55,17 +55,55 @@ export default function WebmailPage() {
   const [sending, setSending] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
+  // Domain verification state
+  const [domainStatus, setDomainStatus] = useState<{
+    configured: boolean;
+    status: string;
+    domain?: string;
+    message?: string;
+  } | null>(null);
+  const [verifyingDomain, setVerifyingDomain] = useState(false);
+
   // Check auth on mount
   useEffect(() => {
     checkAuth();
   }, []);
 
-  // Fetch emails when user or folder changes
+  // Fetch emails and domain status when user changes
   useEffect(() => {
     if (currentUser) {
       fetchEmails();
+      checkDomainStatus();
     }
   }, [currentUser, folder]);
+
+  const checkDomainStatus = async () => {
+    try {
+      const res = await fetch('/api/emails/domain-status');
+      const data = await res.json();
+      setDomainStatus(data);
+    } catch (err) {
+      console.error('Error checking domain status:', err);
+    }
+  };
+
+  const handleTriggerVerify = async () => {
+    setVerifyingDomain(true);
+    try {
+      const res = await fetch('/api/emails/domain-status', { method: 'POST' });
+      const data = await res.json();
+      if (res.ok) {
+        showToast('Resend DNS check triggered! Refreshing status...');
+        await checkDomainStatus();
+      } else {
+        showToast(data.error || 'Verification check failed.', 'error');
+      }
+    } catch (err: any) {
+      showToast(err.message || 'Error triggering verification.', 'error');
+    } finally {
+      setVerifyingDomain(false);
+    }
+  };
 
   const showToast = (message: string, type: 'success' | 'error' = 'success') => {
     setNotification({ message, type });
@@ -675,19 +713,60 @@ export default function WebmailPage() {
               })}
             </div>
 
-            <div className="p-2 rounded-xl bg-white border border-[#E8DFD0] text-[10px] text-[#7A6E65] space-y-0.5">
-              <div className="font-bold text-[#2C2420] flex items-center gap-1">
-                <Building2 className="w-3 h-3 text-[#D95D24]" />
-                <span>Hostinger &amp; Resend</span>
+            <div className="p-2.5 rounded-xl bg-white border border-[#E8DFD0] text-[10px] text-[#7A6E65] space-y-1">
+              <div className="font-bold text-[#2C2420] flex items-center justify-between">
+                <span className="flex items-center gap-1">
+                  <Building2 className="w-3 h-3 text-[#D95D24]" />
+                  <span>Resend Domain</span>
+                </span>
+                <span className={`px-1.5 py-0.5 rounded font-bold uppercase text-[9px] ${
+                  domainStatus?.status === 'verified'
+                    ? 'bg-emerald-100 text-emerald-800'
+                    : 'bg-amber-100 text-amber-800'
+                }`}>
+                  {domainStatus?.status === 'verified' ? 'Verified' : 'Pending'}
+                </span>
               </div>
-              <p>DNS active on @ulbil.com</p>
+              <p className="text-[10px] text-[#7A6E65] truncate font-mono">
+                {domainStatus?.domain || 'ulbil.com'}
+              </p>
             </div>
           </div>
         </aside>
 
         {/* Right: Email List or Email Detail Pane */}
         <main className="flex-1 flex flex-col bg-white overflow-hidden">
-          
+          {/* Domain Verification Notice Banner */}
+          {domainStatus && domainStatus.status !== 'verified' && (
+            <div className="bg-amber-50 border-b border-amber-200 px-4 py-2.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-amber-900 shrink-0">
+              <div className="flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+                <span>
+                  <strong>Domain Status:</strong> <code className="font-mono font-bold">{domainStatus.domain || 'ulbil.com'}</code> is <strong>{domainStatus.status === 'not_added' ? 'not yet added' : 'pending verification'}</strong> on Resend. Outbound emails will be rejected by Resend until verified.
+                </span>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={handleTriggerVerify}
+                  disabled={verifyingDomain}
+                  className="px-2.5 py-1 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-1.5 text-[11px]"
+                >
+                  <RefreshCw className={`w-3 h-3 ${verifyingDomain ? 'animate-spin' : ''}`} />
+                  <span>{verifyingDomain ? 'Checking...' : 'Check & Verify Domain'}</span>
+                </button>
+                <a
+                  href="https://resend.com/domains"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 bg-white border border-amber-300 hover:bg-amber-100 text-amber-800 font-semibold rounded-lg transition-colors text-[11px]"
+                >
+                  Resend Dashboard ↗
+                </a>
+              </div>
+            </div>
+          )}
+
           {/* Subheader Toolbar */}
           <div className="h-12 border-b border-[#E8DFD0] px-4 flex items-center justify-between bg-white shrink-0">
             <div className="flex items-center gap-2">
