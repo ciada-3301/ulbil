@@ -98,7 +98,7 @@ export const EMINENT_PERSONS: EminentPerson[] = [
   {
     id: 'sri-abhay-kumar-das',
     name: 'Sri Abhay Kumar Das',
-    designation: "Hon'ble Chairman, Uluberia Municipality",
+    designation: "Ex-Chairman, Uluberia Municipality",
     subDesignation: 'Eminent Personality & Social Worker',
     roleInLibrary: 'Life-Member, Uluberia Institute & Library',
     image: '/files/contents/sri_abhay_das.jpg',
