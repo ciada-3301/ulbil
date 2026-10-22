@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { DEPARTMENTS } from '@/lib/emails/config';
 import { getStoredEmails, updateEmail, deleteEmailPermanently } from '@/lib/emails/store';
+import { syncInboundEmailsFromResend } from '@/lib/emails/service';
 
 const SESSION_COOKIE = 'uil_webmail_user';
 
@@ -23,6 +24,15 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const folder = (searchParams.get('folder') || 'inbox') as 'inbox' | 'sent' | 'trash';
   const query = searchParams.get('search')?.toLowerCase() || '';
+
+  // If viewing inbox, opportunistically sync any incoming emails from Resend
+  if (folder === 'inbox') {
+    try {
+      await syncInboundEmailsFromResend();
+    } catch (err) {
+      console.error('Error syncing emails from Resend:', err);
+    }
+  }
 
   const allEmails = getStoredEmails();
 

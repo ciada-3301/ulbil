@@ -68,14 +68,14 @@ export function saveStoredEmails(emails: StoredEmail[]): void {
   }
 }
 
-export function addEmail(email: Omit<StoredEmail, 'id' | 'createdAt' | 'snippet'>): StoredEmail {
+export function addEmail(email: Omit<StoredEmail, 'id' | 'createdAt' | 'snippet'> & { id?: string }): StoredEmail {
   const emails = getStoredEmails();
   const plainText = email.text || email.html?.replace(/<[^>]*>/g, '') || '';
   const snippet = plainText.slice(0, 120).trim() + (plainText.length > 120 ? '...' : '');
 
   const newEmail: StoredEmail = {
     ...email,
-    id: `em-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    id: email.id || `em-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     createdAt: new Date().toISOString(),
     snippet
   };

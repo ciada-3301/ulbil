@@ -135,24 +135,45 @@ export async function sendDepartmentEmail(payload: SendEmailPayload): Promise<Se
  * Process inbound email received from Resend Webhook
  */
 export async function processInboundEmail(webhookData: any): Promise<{ received: number }> {
-  // Resend inbound webhook payloads can contain:
-  // { type: 'email.received', data: { from, to, subject, html, text, ... } }
   const data = webhookData.data || webhookData;
-  const toList: string[] = Array.isArray(data.to) ? data.to : [data.to || ''];
-  const from = data.from || 'unknown@sender.com';
-  const subject = data.subject || '(No Subject)';
-  const text = data.text || '';
-  const html = data.html || '';
+  const apiKey = getResendApiKey();
+  const emailId = data.email_id || data.id;
+
+  let text = data.text || '';
+  let html = data.html || '';
+  let subject = data.subject || '(No Subject)';
+  let from = data.from || 'unknown@sender.com';
+  let toList: string[] = Array.isArray(data.to) ? data.to : [data.to || ''];
+
+  // If body is missing, fetch full email payload from Resend receiving API
+  if (apiKey && emailId && (!text && !html)) {
+    try {
+      const resend = new Resend(apiKey);
+      const full = await resend.emails.receiving.get(emailId);
+      if (full.data) {
+        text = full.data.text || text;
+        html = full.data.html || html;
+        subject = full.data.subject || subject;
+        from = full.data.from || from;
+        if (Array.isArray(full.data.to) && full.data.to.length > 0) {
+          toList = full.data.to;
+        }
+      }
+    } catch (err) {
+      console.error('Error fetching full email in webhook:', err);
+    }
+  }
 
   let receivedCount = 0;
+  const recordId = emailId ? `resend-${emailId}` : undefined;
 
   for (const toAddress of toList) {
-    // Extract raw email address from "Name <user@domain.com>" format
     const match = toAddress.match(/<([^>]+)>/);
     const rawTo = (match ? match[1] : toAddress).toLowerCase().trim();
 
     if (DEPARTMENTS[rawTo]) {
       addEmail({
+        id: recordId,
         from,
         fromName: data.fromName || from,
         to: [rawTo],
@@ -170,4 +191,76 @@ export async function processInboundEmail(webhookData: any): Promise<{ received:
   }
 
   return { received: receivedCount };
+}
+
+/**
+ * Poll / sync incoming emails from Resend Receiving API
+ */
+export async function syncInboundEmailsFromResend(): Promise<{ synced: number }> {
+  const apiKey = getResendApiKey();
+  if (!apiKey) return { synced: 0 };
+
+  try {
+    const resend = new Resend(apiKey);
+    const listResult = await resend.emails.receiving.list();
+    if (listResult.error || !listResult.data) {
+      return { synced: 0 };
+    }
+
+    const receivedItems = (listResult.data as any)?.data || (Array.isArray(listResult.data) ? listResult.data : []);
+    let count = 0;
+
+    for (const item of receivedItems) {
+      const emailId = `resend-${item.id}`;
+      let text = item.text || '';
+      let html = item.html || '';
+      let subject = item.subject || '(No Subject)';
+      let from = item.from || '';
+      let toList = Array.isArray(item.to) ? item.to : [item.to || ''];
+
+      // If full content is not in list item, retrieve with get()
+      if (!text && !html) {
+        try {
+          const full = await resend.emails.receiving.get(item.id);
+          if (full.data) {
+            text = full.data.text || text;
+            html = full.data.html || html;
+            subject = full.data.subject || subject;
+            from = full.data.from || from;
+            toList = Array.isArray(full.data.to) ? full.data.to : toList;
+          }
+        } catch (err) {
+          console.error('Error fetching email details:', err);
+        }
+      }
+
+      for (const toAddress of toList) {
+        const match = toAddress.match(/<([^>]+)>/);
+        const rawTo = (match ? match[1] : toAddress).toLowerCase().trim();
+
+        if (DEPARTMENTS[rawTo]) {
+          addEmail({
+            id: emailId,
+            from,
+            fromName: from,
+            to: [rawTo],
+            replyTo: from,
+            subject,
+            text,
+            html,
+            folder: 'inbox',
+            department: rawTo,
+            isRead: false,
+            isStarred: false
+          });
+          count++;
+        }
+      }
+    }
+
+    return { synced: count };
+  } catch (err) {
+    console.error('Error syncing inbound emails from Resend:', err);
+    return { synced: 0 };
+  }
 }
