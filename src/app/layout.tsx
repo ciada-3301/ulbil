@@ -4,6 +4,7 @@ import "./globals.css";
 import LayoutShell from "@/components/layout/LayoutShell";
 import MaintenanceScreen from "@/components/maintenance/MaintenanceScreen";
 import { isMaintenanceActive } from "@/config/maintenance";
+import { Analytics } from "@vercel/analytics/next";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -121,6 +122,7 @@ export default function RootLayout({
             {children}
           </LayoutShell>
         )}
+        <Analytics />
       </body>
     </html>
   );
