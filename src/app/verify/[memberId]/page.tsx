@@ -15,6 +15,7 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import { INITIAL_PATRONS, INITIAL_LOANS } from '@/data/mockStore';
+import seedMembers from '@/data/seedMembers.json';
 
 export default function MemberVerificationPage({
   params,
@@ -24,9 +25,30 @@ export default function MemberVerificationPage({
   const resolvedParams = use(params);
   const rawId = decodeURIComponent(resolvedParams.memberId);
 
-  const patron = INITIAL_PATRONS.find(
+  const foundMock = INITIAL_PATRONS.find(
     (p) => p.memberId.toLowerCase() === rawId.toLowerCase()
   );
+
+  const foundSeed = !foundMock 
+    ? seedMembers.find((m) => m.memberId.toLowerCase() === rawId.toLowerCase())
+    : null;
+
+  const patron = foundMock || (foundSeed ? {
+    id: foundSeed.id,
+    memberId: foundSeed.memberId,
+    name: foundSeed.name,
+    email: foundSeed.email || 'N/A',
+    phone: foundSeed.phone ? `+91 ${foundSeed.phone}` : 'N/A',
+    emailVerified: false,
+    phoneVerified: true,
+    role: foundSeed.role as 'MEMBER' | 'ADMIN',
+    tier: foundSeed.tier as 'General Reader' | 'Honourable Life Patron',
+    status: foundSeed.status as 'ACTIVE',
+    joinedDate: foundSeed.joiningDate,
+    validUntil: foundSeed.validUntil,
+    address: foundSeed.address,
+    photoUrl: undefined
+  } : null);
 
   const activeLoans = patron 
     ? INITIAL_LOANS.filter((l) => l.memberId === patron.memberId && l.status !== 'RETURNED')

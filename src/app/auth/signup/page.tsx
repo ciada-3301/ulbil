@@ -8,14 +8,14 @@ import {
   UserPlus, 
   Mail, 
   Phone, 
-  Lock, 
   MapPin, 
-  Award, 
   ShieldCheck, 
   CheckCircle2, 
   Sparkles,
   ArrowRight,
-  AlertCircle
+  AlertCircle,
+  Clock,
+  KeyRound
 } from 'lucide-react';
 import { MEMBERSHIP_TIERS } from '@/data/libraryData';
 
@@ -26,7 +26,6 @@ export default function SignUpPage() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [password, setPassword] = useState('');
   const [selectedTier, setSelectedTier] = useState('General Reader');
 
   // Verification step
@@ -38,30 +37,51 @@ export default function SignUpPage() {
 
   const [generatedMemberId, setGeneratedMemberId] = useState('');
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
 
-    if (!fullName || !email || !phone || !password || !address) {
-      setErrorMsg('All fields are mandatory. We require verified phone & email for membership records.');
+    if (!fullName || !phone || !address) {
+      setErrorMsg('Full Name, Mobile Phone, and Residential Address are mandatory.');
       return;
     }
 
-    if (phone.replace(/\D/g, '').length < 10) {
+    const cleanPhone = phone.replace(/\D/g, '');
+    if (cleanPhone.length < 10) {
       setErrorMsg('Please enter a valid 10-digit Indian mobile number.');
       return;
     }
 
     setLoading(true);
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          identifier: cleanPhone,
+          purpose: 'SIGNUP'
+        })
+      });
+
+      const data = await res.json();
       setLoading(false);
-      const code = Math.floor(100000 + Math.random() * 900000).toString();
-      setSimulatedOtp(code);
+
+      if (!res.ok) {
+        setErrorMsg(data.error || 'Failed to dispatch WhatsApp verification code.');
+        return;
+      }
+
+      if (data.testOtp) {
+        setSimulatedOtp(data.testOtp);
+      }
       setStep('VERIFY_PHONE');
-    }, 600);
+    } catch {
+      setLoading(false);
+      setErrorMsg('Network error connecting to verification service.');
+    }
   };
 
-  const handleVerifyOtp = (e: React.FormEvent) => {
+  const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
 
@@ -70,31 +90,41 @@ export default function SignUpPage() {
       return;
     }
 
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      const randomNum = Math.floor(1000 + Math.random() * 9000);
-      const newId = `UIL-2026-${randomNum}`;
-      setGeneratedMemberId(newId);
+    const cleanPhone = phone.replace(/\D/g, '');
 
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('ulbil_user', JSON.stringify({
-          name: fullName,
-          email,
-          phone,
-          address,
-          tier: selectedTier,
-          memberId: newId,
-          validUntil: selectedTier.includes('Life') ? 'Lifetime Patron' : '2027-08-31',
-          joinedDate: new Date().toISOString().split('T')[0],
-          status: 'ACTIVE',
-          phoneVerified: true,
-          emailVerified: true
-        }));
+    setLoading(true);
+    try {
+      const res = await fetch('/api/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          identifier: cleanPhone,
+          code: phoneOtp.trim(),
+          purpose: 'SIGNUP',
+          signupData: {
+            name: fullName.trim(),
+            phone: cleanPhone,
+            email: email.trim() || undefined,
+            address: address.trim(),
+            tier: selectedTier
+          }
+        })
+      });
+
+      const data = await res.json();
+      setLoading(false);
+
+      if (!res.ok) {
+        setErrorMsg(data.error || 'Invalid verification code. Please check and try again.');
+        return;
       }
 
+      setGeneratedMemberId(data.memberId || 'UIL-PENDING');
       setStep('SUCCESS');
-    }, 600);
+    } catch {
+      setLoading(false);
+      setErrorMsg('Network error during verification.');
+    }
   };
 
   return (
@@ -103,18 +133,18 @@ export default function SignUpPage() {
         
         {/* Header Branding */}
         <div className="text-center space-y-2">
-          <div className="w-12 h-14 mx-auto relative">
+          <div className="w-14 h-16 mx-auto relative">
             <Image
               src="/images/logo_digital.png"
               alt="UIL Logo"
               fill
-              sizes="48px"
+              sizes="56px"
               className="object-contain"
               unoptimized
             />
           </div>
           <h1 className="font-serif font-extrabold text-2xl text-[#221F1E]">
-            Reader Membership Registration
+            Reader Membership Application
           </h1>
           <p className="text-xs text-[#7A6E65]">
             Join the 125-year legacy of Uluberia Institute & Library.
@@ -128,68 +158,24 @@ export default function SignUpPage() {
           </div>
         )}
 
-        {/* Step 1: Registration Options */}
+        {/* Step 1: Registration Form */}
         {step === 'FORM' && (
-          <div className="space-y-5">
-            {/* Google Fast Registration Option */}
-            <button
-              onClick={() => {
-                setLoading(true);
-                setTimeout(() => {
-                  setLoading(false);
-                  router.push('/auth/onboarding');
-                }, 600);
-              }}
-              disabled={loading}
-              className="w-full py-3 px-4 rounded-xl border-2 border-[#DFB343]/70 bg-white hover:bg-[#FEF5ED] text-xs font-bold text-[#221F1E] shadow-2xs transition-all flex items-center justify-center gap-3 cursor-pointer"
-            >
-              <svg className="w-4 h-4" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-              </svg>
-              <span>Register Instantly with Google (Auto Email Verification)</span>
-            </button>
-
-            <div className="flex items-center gap-2 text-xs text-[#7A6E65]">
-              <div className="flex-1 h-px bg-[#EADBCC]" />
-              <span>or register manually with standard form</span>
-              <div className="flex-1 h-px bg-[#EADBCC]" />
+          <form onSubmit={handleFormSubmit} className="space-y-4">
+            <div>
+              <label className="block text-xs font-bold text-[#3E3835] mb-1">Full Legal Name *</label>
+              <input
+                type="text"
+                required
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="e.g. Suman Sengupta"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FCFBF7] border border-[#EADBCC] text-xs focus:border-[#C2592B] focus:outline-hidden"
+              />
             </div>
-
-            {/* Standard Manual Registration Form */}
-            <form onSubmit={handleFormSubmit} className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold text-[#3E3835] mb-1">Full Legal Name *</label>
-                <input
-                  type="text"
-                  required
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="e.g. Suman Sengupta"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#FCFBF7] border border-[#EADBCC] text-xs focus:border-[#C2592B] focus:outline-hidden"
-                />
-              </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-bold text-[#3E3835] mb-1">Email Address *</label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C69214]" />
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="name@email.com"
-                    className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-[#FCFBF7] border border-[#EADBCC] text-xs focus:border-[#C2592B] focus:outline-hidden"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-[#3E3835] mb-1">Mobile Phone (for OTP) *</label>
+                <label className="block text-xs font-bold text-[#3E3835] mb-1">Mobile Phone (WhatsApp OTP) *</label>
                 <div className="relative">
                   <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C69214]" />
                   <input
@@ -197,41 +183,38 @@ export default function SignUpPage() {
                     required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+91 98300 00000"
+                    placeholder="10-digit mobile"
+                    className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-[#FCFBF7] border border-[#EADBCC] text-xs focus:border-[#C2592B] focus:outline-hidden font-medium"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-[#3E3835] mb-1">Email Address (Optional)</label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C69214]" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="name@email.com"
                     className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-[#FCFBF7] border border-[#EADBCC] text-xs focus:border-[#C2592B] focus:outline-hidden"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="block text-xs font-bold text-[#3E3835] mb-1">Membership Tier *</label>
-                <select
-                  value={selectedTier}
-                  onChange={(e) => setSelectedTier(e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl bg-[#FCFBF7] border border-[#EADBCC] text-xs focus:border-[#C2592B] focus:outline-hidden"
-                >
-                  <option value="General Reader">General Reader (₹100/yr)</option>
-                  <option value="Student & Senior">Student & Senior Concession (₹50/yr)</option>
-                  <option value="Honourable Life Patron">Honourable Life Patron (₹2,500 one-time)</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-[#3E3835] mb-1">Create Password *</label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#C69214]" />
-                  <input
-                    type="password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Min 6 characters"
-                    className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-[#FCFBF7] border border-[#EADBCC] text-xs focus:border-[#C2592B] focus:outline-hidden"
-                  />
-                </div>
-              </div>
+            <div>
+              <label className="block text-xs font-bold text-[#3E3835] mb-1">Membership Tier *</label>
+              <select
+                value={selectedTier}
+                onChange={(e) => setSelectedTier(e.target.value)}
+                className="w-full px-3 py-2.5 rounded-xl bg-[#FCFBF7] border border-[#EADBCC] text-xs focus:border-[#C2592B] focus:outline-hidden"
+              >
+                <option value="General Reader">General Reader (₹100/yr)</option>
+                <option value="Student & Senior">Student & Senior Concession (₹50/yr)</option>
+                <option value="Honourable Life Patron">Honourable Life Patron (₹2,500 one-time)</option>
+              </select>
             </div>
 
             <div>
@@ -249,49 +232,54 @@ export default function SignUpPage() {
               </div>
             </div>
 
-            <div className="p-3 rounded-xl bg-[#FEF5ED] border border-[#DFB343]/60 text-[11px] text-[#8C6D23] space-y-1">
-              <div className="flex items-center gap-1 font-bold text-[#C2592B]">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Mandatory Two-Factor Verification Policy</span>
+            <div className="p-3.5 rounded-xl bg-[#FEF5ED] border border-[#DFB343]/60 text-xs text-[#8C6D23] space-y-1">
+              <div className="flex items-center gap-1.5 font-bold text-[#C2592B]">
+                <Clock className="w-4 h-4 text-[#C69214]" />
+                <span>Executive Council Approval Required</span>
               </div>
-              <p>
-                To maintain library registry integrity, a verification OTP code will be sent to your mobile number in the next step.
+              <p className="text-[11px] leading-relaxed">
+                As per library constitution rules, all new reader signups must verify their mobile via WhatsApp OTP and receive formal administrator approval before their library card is activated.
               </p>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#D95D24] to-[#C69214] hover:opacity-95 shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#D95D24] to-[#C69214] hover:opacity-95 shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
             >
               <UserPlus className="w-4 h-4" />
-              <span>{loading ? 'Processing...' : 'Proceed to Mobile Verification'}</span>
+              <span>{loading ? 'Sending WhatsApp Code...' : 'Send WhatsApp OTP Code'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
-        </div>
-      )}
+        )}
 
-        {/* Step 2: Phone OTP Verification Modal */}
+        {/* Step 2: WhatsApp OTP Verification */}
         {step === 'VERIFY_PHONE' && (
           <form onSubmit={handleVerifyOtp} className="space-y-5 animate-in zoom-in-95 duration-200">
             <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-1">
               <div className="font-bold flex items-center gap-1.5 text-[#C2592B]">
                 <Phone className="w-4 h-4" />
-                <span>Verify Mobile Phone: {phone}</span>
+                <span>WhatsApp Verification: +91 {phone.replace(/\D/g, '')}</span>
               </div>
-              <p>We have dispatched a 6-digit verification code to your registered mobile phone.</p>
+              <p>We have dispatched a 6-digit verification code to your WhatsApp.</p>
+              {simulatedOtp && (
+                <div className="mt-1 pt-1 border-t border-amber-200 text-[11px] font-mono text-emerald-800">
+                  Test Mode PIN: <strong>{simulatedOtp}</strong>
+                </div>
+              )}
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#3E3835] mb-1">Enter 6-Digit SMS Code *</label>
+              <label className="block text-xs font-bold text-[#3E3835] mb-1">Enter 6-Digit Code *</label>
               <input
                 type="text"
                 required
                 maxLength={6}
                 value={phoneOtp}
-                onChange={(e) => setPhoneOtp(e.target.value)}
+                onChange={(e) => setPhoneOtp(e.target.value.replace(/\D/g, ''))}
                 placeholder="••••••"
+                autoFocus
                 className="w-full px-4 py-3 rounded-xl bg-[#FCFBF7] border-2 border-[#DFB343] text-center font-mono text-2xl tracking-widest focus:border-[#C2592B] focus:outline-hidden"
               />
             </div>
@@ -307,65 +295,76 @@ export default function SignUpPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 py-2.5 rounded-xl text-xs font-bold text-white bg-[#C2592B] hover:bg-[#D95D24] shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="flex-1 py-2.5 rounded-xl text-xs font-bold text-white bg-[#C2592B] hover:bg-[#D95D24] shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
               >
                 <CheckCircle2 className="w-4 h-4" />
-                <span>{loading ? 'Verifying...' : 'Verify Phone & Issue Card'}</span>
+                <span>{loading ? 'Verifying...' : 'Verify & Submit Application'}</span>
               </button>
             </div>
           </form>
         )}
 
-        {/* Step 3: Success Confirmation */}
+        {/* Step 3: Success Confirmation (Pending Admin Approval) */}
         {step === 'SUCCESS' && (
           <div className="space-y-6 text-center animate-in zoom-in-95 duration-200">
-            <div className="w-16 h-16 mx-auto rounded-full bg-emerald-100 border-2 border-emerald-500 text-emerald-600 flex items-center justify-center shadow-md">
-              <CheckCircle2 className="w-10 h-10" />
+            <div className="w-16 h-16 mx-auto rounded-full bg-amber-100 border-2 border-amber-500 text-amber-600 flex items-center justify-center shadow-md">
+              <Clock className="w-10 h-10" />
             </div>
 
             <div className="space-y-2">
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#FEF5ED] text-[#C2592B] border border-[#DFB343]/60">
-                Official Registration Confirmed
+              <span className="px-3.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                Application Received • Pending Admin Approval
               </span>
               <h2 className="font-serif font-extrabold text-2xl text-[#221F1E]">
-                Welcome, {fullName}!
+                Thank you, {fullName}!
               </h2>
-              <p className="text-xs text-[#7A6E65]">
-                Your email and mobile phone have been verified in the central registry.
+              <p className="text-xs text-[#7A6E65] leading-relaxed">
+                Your mobile phone number (+91 {phone.replace(/\D/g, '')}) has been verified. To complete enrollment, the Library Administration reviews all new signups before issuing active cards.
               </p>
             </div>
 
             <div className="p-4 rounded-2xl bg-[#FCFBF7] border-2 border-[#DFB343] space-y-2 text-left text-xs">
               <div className="flex justify-between items-center">
-                <span className="text-[#7A6E65]">Allocated Member ID:</span>
+                <span className="text-[#7A6E65]">Reference Application ID:</span>
                 <span className="font-mono font-bold text-base text-[#C2592B]">{generatedMemberId}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-[#7A6E65]">Membership Tier:</span>
+                <span className="text-[#7A6E65]">Requested Tier:</span>
                 <span className="font-bold text-[#221F1E]">{selectedTier}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-[#7A6E65]">Status:</span>
-                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
-                  ACTIVE
+                <span className="text-[#7A6E65]">Approval Status:</span>
+                <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-300">
+                  PENDING REVIEW
                 </span>
               </div>
             </div>
 
-            <button
-              onClick={() => router.push('/dashboard')}
-              className="w-full py-3.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#D95D24] to-[#C69214] hover:opacity-95 shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>Enter Member Dashboard & View Digital Card</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <div className="p-3 bg-white rounded-xl border border-[#EADBCC] text-xs text-[#6B5A4E]">
+              Once an administrator approves your profile, you will be able to log in immediately using your mobile number and receive instant WhatsApp OTP codes.
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link
+                href="/auth/signin"
+                className="flex-1 py-3 rounded-xl text-xs font-bold text-white bg-[#C2592B] hover:bg-[#A8451B] transition-all flex items-center justify-center gap-1.5 shadow-sm"
+              >
+                <span>Go to Sign In</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/"
+                className="flex-1 py-3 rounded-xl text-xs font-bold text-[#7A6E65] bg-white border border-[#EADBCC] hover:bg-[#FCFBF7] transition-all flex items-center justify-center"
+              >
+                Back to Homepage
+              </Link>
+            </div>
           </div>
         )}
 
         {/* Footer Navigation */}
         <div className="text-center text-xs text-[#7A6E65] pt-2 border-t border-[#EADBCC]">
-          Already an enrolled member?{' '}
+          Already an enrolled member in our register?{' '}
           <Link href="/auth/signin" className="font-bold text-[#C2592B] hover:underline">
             Sign In Here
           </Link>
