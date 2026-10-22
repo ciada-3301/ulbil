@@ -92,8 +92,8 @@ export const EMINENT_PERSONS: EminentPerson[] = [
     subDesignation: 'Govt. of West Bengal & Eminent Social Reformer',
     roleInLibrary: 'Life-Member, Uluberia Institute & Library',
     image: '/files/contents/sri_pulok_roy.jpg',
-    message: "Uluberia Institute and Library, a prestigious institution rich with eminent personalities from Uluberia's unique art, culture, literature, and education, marks a glorious 125-year chapter. This institution, which has always been vibrant with the comings and goings of cultured and talented people from various professions, is a prominent symbol of social consciousness and social values. I hope that in the days to come, this institution, radiating Bengali culture, will become even more accepted and cherished by the new generation in the field of balanced education and culture.",
-    fullMessageUrl: '/files/contents/Sri%20Pulok%20Roy.pdf'
+    message: "Uluberia Institute and Library, a prestigious institution rich with eminent personalities from Uluberia's unique art, culture, literature, and education, marks a glorious 125-year chapter. This institution, which has always been vibrant with the comings and goings of cultured and talented people from various professions, is a prominent symbol of social consciousness and social values. I hope that in the days to come, this institution, radiating Bengali culture, will become even more appreciated and accepted by the new generation in the field of balanced education and culture.",
+    fullMessageUrl: '/files/contents/Sri%20Pulak%20Roy.pdf'
   },
   {
     id: 'sri-abhay-kumar-das',
