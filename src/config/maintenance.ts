@@ -21,7 +21,7 @@ export function isMaintenanceActive(): boolean {
     return process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
   }
   if (process.env.MAINTENANCE_MODE !== undefined) {
-    return process.env.MAINTENANCE_MODE === 'true';
+    return process.env.MAINTENANCE_MODE === 'false';
   }
   return MAINTENANCE_MODE;
 }
