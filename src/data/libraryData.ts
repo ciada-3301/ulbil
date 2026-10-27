@@ -352,37 +352,47 @@ export const RECENT_NOTICES: Notice[] = [
   }
 ];
 
-export const GALLERY_SLIDES = [
-  { id: 1, title: 'Historical Library Facade & Heritage Arch', year: 'Archival Collection', url: '/images/slideshow/1.jpg', category: 'Centenary Jubilee' },
-  { id: 2, title: 'Annual Cultural Festival & Dignitaries Felicitation', year: 'Annual Ceremony', url: '/images/slideshow/2.jpg', category: 'Cultural Events' },
-  { id: 3, title: 'Library Delegation Meeting with SDO Uluberia', year: 'Administrative Wing', url: '/images/slideshow/3.jpeg', category: 'Centenary Jubilee' },
-  { id: 4, title: 'Executive Council & Patrons Assembly at SDO Office', year: 'Governing Council', url: '/images/slideshow/4.jpg', category: 'Centenary Jubilee' },
-  { id: 5, title: "'Satta' Literary Journal Sharadiya Souvenir Release", year: 'Publication Desk', url: '/images/slideshow/5.jpg', category: 'Cultural Events' },
-  { id: 6, title: 'Felicitation of Distinguished Guests & Patrons', year: 'Heritage Assembly', url: '/images/slideshow/6.jpg', category: 'Cultural Events' },
-  { id: 7, title: 'Unveiling of Library Memorial Plaques & Development Wing', year: 'Memorial Plaque', url: '/images/slideshow/7.jpg', category: 'Anniversary Celebrations' },
-  { id: 8, title: 'Book Fair & Commemorative Souvenir Release', year: 'Publication Desk', url: '/images/slideshow/8.jpg', category: 'Cultural Events' },
-  { id: 9, title: 'Community Outreach & Book Distribution at Uluberia Sub-Correctional Home', year: 'Social Outreach', url: '/images/slideshow/9.jpeg', category: 'Anniversary Celebrations' },
-  { id: 10, title: 'Basanta Utsab & Spring Literary Gathering', year: 'Festival of Spring', url: '/images/slideshow/10.jpg', category: 'Cultural Events' },
-  { id: 11, title: 'Children Summer Drama & Art Workshop', year: 'Youth Academy', url: '/images/slideshow/11.jpg', category: 'Youth Drama' },
-  { id: 12, title: 'Central Reading Room & Rare Manuscript Desk', year: 'Reading Halls', url: '/images/slideshow/12.jpg', category: 'Library Reading Room' },
-  { id: 13, title: 'Keynote Literary Address at Library Commemoration Podium', year: 'Academic Wing', url: '/images/slideshow/13.jpeg', category: 'Cultural Events' },
-  { id: 14, title: 'Cultural Memorial Evening & Classical Recital', year: 'Cultural Wing', url: '/images/slideshow/14.jpeg', category: 'Cultural Events' },
-  { id: 15, title: 'Choto Natoker Asor (Short Drama Evening) by Library Theatre Group', year: 'Drama Academy', url: '/images/slideshow/15.jpeg', category: 'Youth Drama' },
-  { id: 16, title: 'Historical Archive & Minutes Register from 1902', year: 'Archives', url: '/images/slideshow/16.jpg', category: 'Centenary Jubilee' },
-  { id: 17, title: 'Commemorative Exhibition for 125-Year Milestone', year: 'Jubilee 125', url: '/images/slideshow/17.jpg', category: 'Centenary Jubilee' },
-  { id: 18, title: 'International Mother Language Day & 125-Year Discussion Assembly', year: 'Memorial Wing', url: '/images/slideshow/18.jpeg', category: 'Anniversary Celebrations' },
-  { id: 19, title: 'Bhratri Dwitiya Utsab & Community Brotherhood Gathering', year: 'Community Heritage', url: '/images/slideshow/19.jpeg', category: 'Cultural Events' },
-  { id: 20, title: 'Poila Boishakh Prabhat Pheri & Cultural Heritage Procession', year: 'Heritage Walk', url: '/images/slideshow/20.jpeg', category: 'Anniversary Celebrations' },
-  { id: 21, title: 'Library Working Committee & Event Organizers Assembly', year: 'Executive Body', url: '/images/slideshow/21.jpeg', category: 'Centenary Jubilee' },
-  { id: 22, title: 'Audience & Young Artists at Library Auditorium', year: 'Auditorium', url: '/images/slideshow/22.jpeg', category: 'Cultural Events' },
-  { id: 23, title: 'Teachers\' Day Memorial Tribute to Dr. S. Radhakrishnan', year: 'Academic Wing', url: '/images/slideshow/23.jpeg', category: 'Cultural Events' },
-  { id: 24, title: 'Inaugural Choral Song & Ceremonial Lamp Lighting', year: 'Inaugural Ceremony', url: '/images/slideshow/24.jpg', category: 'Cultural Events' },
-  { id: 25, title: 'Baishe Srabon - Kobi Pronam Rabindra Smaran Stage Performance', year: 'Rabindra Sandhya', url: '/images/slideshow/25.jpeg', category: 'Cultural Events' },
-  { id: 26, title: 'Cultural Procession with Historic Literary Portraits', year: 'Literary Heritage', url: '/images/slideshow/26.jpeg', category: 'Anniversary Celebrations' },
-  { id: 27, title: 'Youth Folk Drama Characters & Theatrical Costume Workshop', year: 'Youth Academy', url: '/images/slideshow/27.jpeg', category: 'Youth Drama' },
-  { id: 28, title: 'Community Readers & Audience at Drama Festival', year: 'Audience Hall', url: '/images/slideshow/28.jpeg', category: 'Youth Drama' },
-  { id: 29, title: 'World Environment Day Tree Plantation by Library Eco-Wing', year: 'Green Initiative', url: '/images/slideshow/29.jpg', category: 'Anniversary Celebrations' },
-  { id: 30, title: 'Nabanna Harvest Festival & Folk Handicrafts Exhibition Coverage', year: 'Folk Heritage', url: '/images/slideshow/30.jpg', category: 'Cultural Events' }
+export interface GallerySlide {
+  id: number;
+  title: string;
+  year: string;
+  url: string;
+  category: string;
+  orientation?: 'portrait' | 'landscape' | 'standard';
+  isPortrait?: boolean;
+}
+
+export const GALLERY_SLIDES: GallerySlide[] = [
+  { id: 1, title: 'Historical Library Facade & Heritage Arch', year: 'Archival Collection', url: '/images/slideshow/1.jpg', category: 'Centenary Jubilee', orientation: 'landscape', isPortrait: false },
+  { id: 2, title: 'Annual Cultural Festival & Dignitaries Felicitation', year: 'Annual Ceremony', url: '/images/slideshow/2.jpg', category: 'Cultural Events', orientation: 'landscape', isPortrait: false },
+  { id: 3, title: 'Library Delegation Meeting with SDO Uluberia', year: 'Administrative Wing', url: '/images/slideshow/3.jpeg', category: 'Centenary Jubilee', orientation: 'landscape', isPortrait: false },
+  { id: 4, title: 'Executive Council & Patrons Assembly at SDO Office', year: 'Governing Council', url: '/images/slideshow/4.jpg', category: 'Centenary Jubilee', orientation: 'landscape', isPortrait: false },
+  { id: 5, title: "'Satta' Literary Journal Sharadiya Souvenir Release", year: 'Publication Desk', url: '/images/slideshow/5.jpg', category: 'Cultural Events', orientation: 'landscape', isPortrait: false },
+  { id: 6, title: 'Felicitation of Distinguished Guests & Patrons', year: 'Heritage Assembly', url: '/images/slideshow/6.jpg', category: 'Cultural Events', orientation: 'landscape', isPortrait: false },
+  { id: 7, title: 'Unveiling of Library Memorial Plaques & Development Wing', year: 'Memorial Plaque', url: '/images/slideshow/7.jpg', category: 'Anniversary Celebrations', orientation: 'landscape', isPortrait: false },
+  { id: 8, title: 'Book Fair & Commemorative Souvenir Release', year: 'Publication Desk', url: '/images/slideshow/8.jpg', category: 'Cultural Events', orientation: 'landscape', isPortrait: false },
+  { id: 9, title: 'Community Outreach & Book Distribution at Uluberia Sub-Correctional Home', year: 'Social Outreach', url: '/images/slideshow/9.jpeg', category: 'Anniversary Celebrations', orientation: 'landscape', isPortrait: false },
+  { id: 10, title: 'Basanta Utsab & Spring Literary Gathering', year: 'Festival of Spring', url: '/images/slideshow/10.jpg', category: 'Cultural Events', orientation: 'landscape', isPortrait: false },
+  { id: 11, title: 'Children Summer Drama & Art Workshop', year: 'Youth Academy', url: '/images/slideshow/11.jpg', category: 'Youth Drama', orientation: 'landscape', isPortrait: false },
+  { id: 12, title: 'Central Reading Room & Rare Manuscript Desk', year: 'Reading Halls', url: '/images/slideshow/12.jpg', category: 'Library Reading Room', orientation: 'landscape', isPortrait: false },
+  { id: 13, title: 'Keynote Literary Address at Library Commemoration Podium', year: 'Academic Wing', url: '/images/slideshow/13.jpeg', category: 'Cultural Events', orientation: 'portrait', isPortrait: true },
+  { id: 14, title: 'Cultural Memorial Evening & Classical Recital', year: 'Cultural Wing', url: '/images/slideshow/14.jpeg', category: 'Cultural Events', orientation: 'landscape', isPortrait: false },
+  { id: 15, title: 'Choto Natoker Asor (Short Drama Evening) by Library Theatre Group', year: 'Drama Academy', url: '/images/slideshow/15.jpeg', category: 'Youth Drama', orientation: 'standard', isPortrait: false },
+  { id: 16, title: 'Historical Archive & Minutes Register from 1902', year: 'Archives', url: '/images/slideshow/16.jpg', category: 'Centenary Jubilee', orientation: 'landscape', isPortrait: false },
+  { id: 17, title: 'Commemorative Exhibition for 125-Year Milestone', year: 'Jubilee 125', url: '/images/slideshow/17.jpg', category: 'Centenary Jubilee', orientation: 'landscape', isPortrait: false },
+  { id: 18, title: 'International Mother Language Day & 125-Year Discussion Assembly', year: 'Memorial Wing', url: '/images/slideshow/18.jpeg', category: 'Anniversary Celebrations', orientation: 'standard', isPortrait: false },
+  { id: 19, title: 'Bhratri Dwitiya Utsab & Community Brotherhood Gathering', year: 'Community Heritage', url: '/images/slideshow/19.jpeg', category: 'Cultural Events', orientation: 'landscape', isPortrait: false },
+  { id: 20, title: 'Poila Boishakh Prabhat Pheri & Cultural Heritage Procession', year: 'Heritage Walk', url: '/images/slideshow/20.jpeg', category: 'Anniversary Celebrations', orientation: 'landscape', isPortrait: false },
+  { id: 21, title: 'Library Working Committee & Event Organizers Assembly', year: 'Executive Body', url: '/images/slideshow/21.jpeg', category: 'Centenary Jubilee', orientation: 'landscape', isPortrait: false },
+  { id: 22, title: 'Audience & Young Artists at Library Auditorium', year: 'Auditorium', url: '/images/slideshow/22.jpeg', category: 'Cultural Events', orientation: 'portrait', isPortrait: true },
+  { id: 23, title: 'Teachers\' Day Memorial Tribute to Dr. S. Radhakrishnan', year: 'Academic Wing', url: '/images/slideshow/23.jpeg', category: 'Cultural Events', orientation: 'landscape', isPortrait: false },
+  { id: 24, title: 'Inaugural Choral Song & Ceremonial Lamp Lighting', year: 'Inaugural Ceremony', url: '/images/slideshow/24.jpg', category: 'Cultural Events', orientation: 'landscape', isPortrait: false },
+  { id: 25, title: 'Baishe Srabon - Kobi Pronam Rabindra Smaran Stage Performance', year: 'Rabindra Sandhya', url: '/images/slideshow/25.jpeg', category: 'Cultural Events', orientation: 'standard', isPortrait: false },
+  { id: 26, title: 'Cultural Procession with Historic Literary Portraits', year: 'Literary Heritage', url: '/images/slideshow/26.jpeg', category: 'Anniversary Celebrations', orientation: 'landscape', isPortrait: false },
+  { id: 27, title: 'Youth Folk Drama Characters & Theatrical Costume Workshop', year: 'Youth Academy', url: '/images/slideshow/27.jpeg', category: 'Youth Drama', orientation: 'portrait', isPortrait: true },
+  { id: 28, title: 'Community Readers & Audience at Drama Festival', year: 'Audience Hall', url: '/images/slideshow/28.jpeg', category: 'Youth Drama', orientation: 'landscape', isPortrait: false },
+  { id: 29, title: 'World Environment Day Tree Plantation by Library Eco-Wing', year: 'Green Initiative', url: '/images/slideshow/29.jpg', category: 'Anniversary Celebrations', orientation: 'landscape', isPortrait: false },
+  { id: 30, title: 'Nabanna Harvest Festival & Folk Handicrafts Exhibition Coverage', year: 'Folk Heritage', url: '/images/slideshow/30.jpg', category: 'Cultural Events', orientation: 'landscape', isPortrait: false }
 ];
 
 export interface MembershipTier {

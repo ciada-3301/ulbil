@@ -89,34 +89,59 @@ export default function HeritageCarousel() {
           </div>
         </div>
 
-        {/* Main Showcase Player (Compact Scale) */}
-        <div className="heritage-card rounded-2xl overflow-hidden bg-[#1C1816] border border-[#D4C5B0] shadow-lg relative group">
+        {/* Main Showcase Player (Mixed Aspect Ratio Responsive) */}
+        <div className="heritage-card rounded-2xl overflow-hidden bg-[#141110] border border-[#D4C5B0] shadow-xl relative group">
           
-          {/* Main Photo Viewport */}
-          <div className="relative w-full h-60 sm:h-72 md:h-[340px] lg:h-[380px] overflow-hidden bg-neutral-900">
-            <Image
-              src={activeSlide.url}
-              alt={activeSlide.title}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1000px"
-              className="object-cover transition-all duration-700 ease-out"
-              priority
-              unoptimized
-            />
+          {/* Main Photo Viewport: Generous Height for both Landscape & Portrait */}
+          <div className="relative w-full h-72 sm:h-88 md:h-[420px] lg:h-[480px] xl:h-[520px] overflow-hidden bg-[#100D0C]">
             
-            {/* Gradient Overlay for Text Legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
+            {/* Ambient Blurred Background (fills wide container gracefully without black letterbox voids) */}
+            <div className="absolute inset-0 overflow-hidden select-none pointer-events-none">
+              <Image
+                key={`bg-${activeSlide.id}`}
+                src={activeSlide.url}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 1200px"
+                className="object-cover blur-2xl opacity-45 scale-110 transition-all duration-700 ease-out"
+                unoptimized
+                aria-hidden="true"
+              />
+              <div className="absolute inset-0 bg-radial from-transparent via-black/35 to-black/75" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/35" />
+            </div>
+
+            {/* Foreground Crisp Image: 100% Unclipped Viewport */}
+            <div className="relative w-full h-full flex items-center justify-center p-2 sm:p-4 z-1">
+              <Image
+                key={`fg-${activeSlide.id}`}
+                src={activeSlide.url}
+                alt={activeSlide.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
+                className="object-contain transition-all duration-500 ease-out drop-shadow-2xl"
+                priority
+                unoptimized
+              />
+            </div>
 
             {/* Top Bar Controls */}
-            <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-black/60 text-[#B8860B] border border-[#B8860B]/40 backdrop-blur-md flex items-center gap-1.5 shadow-sm">
-                <Sparkles className="w-3 h-3" />
-                <span>{activeSlide.year}</span>
-                <span className="text-white/60">•</span>
-                <span className="text-white font-medium">{activeSlide.category}</span>
-              </span>
+            <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+              <div className="flex items-center gap-2 pointer-events-auto">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-black/65 text-[#DFB343] border border-[#DFB343]/40 backdrop-blur-md flex items-center gap-1.5 shadow-sm">
+                  <Sparkles className="w-3 h-3 text-[#DFB343]" />
+                  <span>{activeSlide.year}</span>
+                  <span className="text-white/60">•</span>
+                  <span className="text-white font-medium">{activeSlide.category}</span>
+                </span>
+                {activeSlide.isPortrait && (
+                  <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#D95D24]/80 text-white border border-[#D95D24]/50 backdrop-blur-md">
+                    Full Portrait
+                  </span>
+                )}
+              </div>
 
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 pointer-events-auto">
                 <button
                   onClick={() => setIsPlaying(!isPlaying)}
                   className="p-1.5 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer shadow-sm"
@@ -137,7 +162,7 @@ export default function HeritageCarousel() {
             {/* Navigation Arrows */}
             <button
               onClick={prevSlide}
-              className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 hover:bg-[#D95D24] text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer z-10 opacity-80 hover:opacity-100"
+              className="absolute left-3 top-1/2 -translate-y-1/2 p-2 sm:p-2.5 rounded-full bg-black/55 hover:bg-[#D95D24] text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer z-10 opacity-80 hover:opacity-100 shadow-md"
               aria-label="Previous Slide"
             >
               <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -145,33 +170,41 @@ export default function HeritageCarousel() {
 
             <button
               onClick={nextSlide}
-              className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 hover:bg-[#D95D24] text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer z-10 opacity-80 hover:opacity-100"
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-2 sm:p-2.5 rounded-full bg-black/55 hover:bg-[#D95D24] text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer z-10 opacity-80 hover:opacity-100 shadow-md"
               aria-label="Next Slide"
             >
               <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
-            {/* Bottom Caption Overlay */}
-            <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-6 right-3 sm:right-6 z-10 text-white space-y-1 max-w-xl">
-              <div className="flex items-center gap-1.5 text-[11px] text-[#B8860B] font-semibold tracking-wider uppercase">
-                <span>Slide {currentIndex + 1} of {slides.length}</span>
-                <span>•</span>
-                <span>Uluberia Institute & Library</span>
+            {/* Bottom Caption Card: Compact & Glassmorphic to not occlude vertical portrait photos */}
+            <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-6 right-3 sm:right-6 z-10 pointer-events-none flex flex-col items-start">
+              <div className="max-w-xl bg-black/75 backdrop-blur-md p-3 sm:py-3 sm:px-4 rounded-2xl border border-white/15 shadow-xl space-y-1 pointer-events-auto">
+                <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-[#DFB343] font-semibold tracking-wider uppercase">
+                  <span>Slide {currentIndex + 1} of {slides.length}</span>
+                  <span>•</span>
+                  <span>Uluberia Institute & Library</span>
+                  {activeSlide.isPortrait && (
+                    <>
+                      <span>•</span>
+                      <span className="text-amber-300 font-bold">Portrait</span>
+                    </>
+                  )}
+                </div>
+                <h3 className="font-serif font-bold text-sm sm:text-base lg:text-lg text-white leading-tight drop-shadow-md">
+                  {activeSlide.title}
+                </h3>
+                <p className="text-[11px] sm:text-xs text-neutral-300 line-clamp-1 font-light">
+                  Preserving authentic records of community lectures, reader study sessions, and milestone celebrations since 1902.
+                </p>
               </div>
-              <h3 className="font-serif font-bold text-base sm:text-xl lg:text-2xl text-white leading-tight drop-shadow-md">
-                {activeSlide.title}
-              </h3>
-              <p className="text-xs text-neutral-200 line-clamp-1 drop-shadow-sm font-light">
-                Preserving authentic records of community lectures, reader study sessions, and milestone celebrations since 1902.
-              </p>
             </div>
 
             {/* Auto-play Progress Bar */}
             {isPlaying && (
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-10">
                 <div 
                   key={currentIndex}
-                  className="h-full bg-gradient-to-r from-[#B8860B] to-[#D95D24] animate-progress"
+                  className="h-full bg-gradient-to-r from-[#DFB343] to-[#D95D24] animate-progress"
                   style={{ animationDuration: '5000ms' }}
                 />
               </div>
@@ -180,7 +213,7 @@ export default function HeritageCarousel() {
           </div>
 
           {/* Compact Thumbnail Strip */}
-          <div className="bg-[#1C1816] p-2.5 sm:p-3 border-t border-[#D4C5B0]/30">
+          <div className="bg-[#141110] p-2.5 sm:p-3 border-t border-[#D4C5B0]/30">
             <div 
               ref={thumbnailContainerRef}
               className="flex items-center gap-2 overflow-x-auto pb-0.5 scrollbar-thin scrollbar-thumb-[#B8860B]/40 scroll-smooth"
@@ -191,9 +224,9 @@ export default function HeritageCarousel() {
                   <button
                     key={slide.id}
                     onClick={() => goToSlide(idx)}
-                    className={`relative shrink-0 w-14 h-10 sm:w-16 sm:h-11 rounded-md overflow-hidden transition-all cursor-pointer border-2 ${
+                    className={`relative shrink-0 w-14 h-10 sm:w-16 sm:h-11 rounded-md overflow-hidden transition-all cursor-pointer border-2 bg-neutral-900 ${
                       isActive 
-                        ? 'border-[#B8860B] scale-105 ring-2 ring-[#B8860B]/50 opacity-100' 
+                        ? 'border-[#DFB343] scale-105 ring-2 ring-[#DFB343]/50 opacity-100' 
                         : 'border-transparent opacity-50 hover:opacity-85'
                     }`}
                   >
@@ -206,6 +239,9 @@ export default function HeritageCarousel() {
                       unoptimized
                     />
                     <div className="absolute inset-0 bg-black/20" />
+                    {slide.isPortrait && (
+                      <span className="absolute top-0.5 left-0.5 w-1.5 h-1.5 rounded-full bg-amber-400" title="Portrait" />
+                    )}
                     <span className="absolute bottom-0.5 right-1 text-[8px] font-mono text-white/90 bg-black/60 px-1 rounded-xs">
                       {idx + 1}
                     </span>
@@ -221,13 +257,16 @@ export default function HeritageCarousel() {
 
       {/* Lightbox Modal */}
       {lightboxOpen && (
-        <div className="fixed inset-0 z-50 bg-black/95 flex flex-col justify-between p-4 sm:p-8 animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 bg-black/95 flex flex-col justify-between p-4 sm:p-6 animate-in fade-in duration-200">
           <div className="flex items-center justify-between text-white">
             <div className="flex items-center gap-2">
               <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#FEF0EA] text-[#D95D24]">
                 {activeSlide.year}
               </span>
               <span className="text-sm font-serif font-bold">{activeSlide.title}</span>
+              {activeSlide.isPortrait && (
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-white/20 text-white">Portrait</span>
+              )}
             </div>
             <button
               onClick={() => setLightboxOpen(false)}
@@ -237,13 +276,23 @@ export default function HeritageCarousel() {
             </button>
           </div>
 
-          <div className="relative w-full h-[65vh] my-auto">
+          <div className="relative w-full h-[74vh] sm:h-[80vh] my-auto flex items-center justify-center overflow-hidden rounded-2xl">
+            {/* Ambient Backdrop */}
+            <Image
+              src={activeSlide.url}
+              alt=""
+              fill
+              className="object-cover blur-2xl opacity-35 scale-110 pointer-events-none"
+              unoptimized
+              aria-hidden="true"
+            />
+            <div className="absolute inset-0 bg-black/50" />
             <Image
               src={activeSlide.url}
               alt={activeSlide.title}
               fill
               sizes="100vw"
-              className="object-contain"
+              className="object-contain p-2 drop-shadow-2xl relative z-1"
               unoptimized
             />
           </div>
