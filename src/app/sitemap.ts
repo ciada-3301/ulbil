@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://ulbil.org';
+  const baseUrl = 'https://ulbil.com';
   const lastModified = new Date();
 
   const routes = [

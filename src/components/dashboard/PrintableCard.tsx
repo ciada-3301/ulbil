@@ -17,7 +17,7 @@ export default function PrintableCard({ patron }: PrintableCardProps) {
     async function loadQr() {
       const verifyUrl = typeof window !== 'undefined' 
         ? `${window.location.origin}/verify/${patron.memberId}`
-        : `https://ulbil.org/verify/${patron.memberId}`;
+        : `https://ulbil.com/verify/${patron.memberId}`;
       const dataUrl = await generateQrDataUrl(verifyUrl, { width: 140, margin: 1 });
       setQrUrl(dataUrl);
     }

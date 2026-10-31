@@ -68,7 +68,7 @@ export const LIBRARY_INFO = {
     'it@ulbil.com',
     'satta@ulbil.com'
   ],
-  website: 'https://ulbil.org',
+  website: 'https://ulbil.com',
   timings: {
     morning: '9:00 AM – 12:00 PM',
     evening: '4:00 PM – 7:00 PM',

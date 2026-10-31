@@ -17,7 +17,7 @@ export default function MembershipCertificate({ patron }: MembershipCertificateP
     async function loadQr() {
       const verifyUrl = typeof window !== 'undefined'
         ? `${window.location.origin}/verify/${patron.memberId}`
-        : `https://ulbil.org/verify/${patron.memberId}`;
+        : `https://ulbil.com/verify/${patron.memberId}`;
       const dataUrl = await generateQrDataUrl(verifyUrl, { width: 160, margin: 1 });
       setQrUrl(dataUrl);
     }
@@ -198,7 +198,7 @@ export default function MembershipCertificate({ patron }: MembershipCertificateP
 
         {/* Footer Security Notice */}
         <div className="text-center text-[9px] text-[#7A6E65] border-t border-[#EADBCC] pt-2 relative z-10">
-          This digital certificate is generated from the central cryptographic database of Uluberia Institute & Library. To authenticate this document, scan the QR code above or visit <span className="font-mono text-[#C2592B]">https://ulbil.org/verify/{patron.memberId}</span>.
+          This digital certificate is generated from the central cryptographic database of Uluberia Institute & Library. To authenticate this document, scan the QR code above or visit <span className="font-mono text-[#C2592B]">https://ulbil.com/verify/{patron.memberId}</span>.
         </div>
 
       </div>

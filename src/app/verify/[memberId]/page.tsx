@@ -160,7 +160,7 @@ export default function MemberVerificationPage({
         {/* Footer Helpline */}
         <div className="space-y-2 pt-2">
           <div className="text-[11px] text-[#7A6E65]">
-            Counter Helpline: (+91) 98363 30911 • ulu.ins.library@ulbil.org
+            Counter Helpline: (+91) 98363 30911 • secretary@ulbil.com • ulu.ins.library@gmail.com
           </div>
           <Link
             href="/"

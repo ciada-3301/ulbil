@@ -65,7 +65,7 @@ export default function MemberDashboardPage() {
     async function initQr() {
       const verifyUrl = typeof window !== 'undefined'
         ? `${window.location.origin}/verify/${patron.memberId}`
-        : `https://ulbil.org/verify/${patron.memberId}`;
+        : `https://ulbil.com/verify/${patron.memberId}`;
       const url = await generateQrDataUrl(verifyUrl, { width: 180 });
       setQrCodeUrl(url);
     }

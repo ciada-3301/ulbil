@@ -191,7 +191,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#E8E0D4] text-xs">
             <p>© 1902–2027 Uluberia Institute & Library. All Rights Reserved.</p>
             <p>Modernized for the 125th Quasquicentennial Celebration</p>
-            <p>Official Domain: <strong>ulbil.org</strong></p>
+            <p>Official Domain: <strong>ulbil.com</strong></p>
           </div>
         </div>
       </div>

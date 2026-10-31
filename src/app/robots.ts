@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/librarian', '/admin', '/dashboard/api/', '/emails', '/api/emails/']
     },
-    sitemap: 'https://ulbil.org/sitemap.xml'
+    sitemap: 'https://ulbil.com/sitemap.xml'
   };
 }

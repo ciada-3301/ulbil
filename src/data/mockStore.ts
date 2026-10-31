@@ -68,7 +68,7 @@ export const INITIAL_PATRONS: Patron[] = [
     id: 'usr-1',
     memberId: 'UIL-2026-0001',
     name: 'Sri Siddhartha Das',
-    email: 'siddhartha.das@ulbil.org',
+    email: 'secretary@ulbil.com',
     phone: '+91 98363 30911',
     emailVerified: true,
     phoneVerified: true,
@@ -78,7 +78,7 @@ export const INITIAL_PATRONS: Patron[] = [
     joinedDate: '2010-01-15',
     validUntil: 'Lifetime',
     address: 'Institute Road, Uluberia, Howrah - 711315',
-    photoUrl: 'https://www.ulbil.org/files/contents/siddhartha_das.jpg'
+    photoUrl: 'https://www.ulbil.com/files/contents/siddhartha_das.jpg'
   },
   {
     id: 'usr-2',
@@ -228,7 +228,7 @@ export const INITIAL_DONATIONS: DonationRecord[] = [
   {
     id: 'don-801',
     donorName: 'Sri Siddhartha Das',
-    email: 'siddhartha.das@ulbil.org',
+    email: 'secretary@ulbil.com',
     phone: '+91 98363 30911',
     panNumber: 'ABCDE1234F',
     amount: 5000,

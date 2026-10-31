@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from 'react';
 import { 
@@ -64,7 +64,7 @@ export default function ContactPage() {
                   <div>
                     <strong className="text-[#2C2420] block">Physical Address</strong>
                     <p className="mt-0.5">{LIBRARY_INFO.address}</p>
-                    <p className="text-[#8B6508] font-semibold mt-1">Uluberia, Howrah, West Bengal â€“ 711315</p>
+                    <p className="text-[#8B6508] font-semibold mt-1">Uluberia, Howrah, West Bengal – 711315</p>
                   </div>
                 </div>
 
@@ -83,10 +83,34 @@ export default function ContactPage() {
                   <div className="w-8 h-8 rounded-xl bg-[#FEF0EA] text-[#D95D24] flex items-center justify-center shrink-0 border border-[#D4C5B0]/40">
                     <Mail className="w-4 h-4" />
                   </div>
-                  <div>
+                  <div className="space-y-2">
                     <strong className="text-[#2C2420] block">Official Email Addresses</strong>
-                    <p><a href="mailto:ulu.ins.library@ulbil.org" className="hover:text-[#D95D24]">ulu.ins.library@ulbil.org</a></p>
-                    <p><a href="mailto:ulu.ins.library@gmail.com" className="hover:text-[#D95D24]">ulu.ins.library@gmail.com</a></p>
+                    <div className="space-y-1.5 text-xs">
+                      <div>
+                        <span className="text-[#9A918A] block text-[11px] leading-tight">General Secretary &amp; Admin:</span>
+                        <a href="mailto:secretary@ulbil.com" className="hover:text-[#D95D24] text-[#2C2420] font-medium transition-colors">
+                          secretary@ulbil.com
+                        </a>
+                      </div>
+                      <div>
+                        <span className="text-[#9A918A] block text-[11px] leading-tight">IT &amp; Web Desk:</span>
+                        <a href="mailto:it@ulbil.com" className="hover:text-[#D95D24] text-[#2C2420] font-medium transition-colors">
+                          it@ulbil.com
+                        </a>
+                      </div>
+                      <div>
+                        <span className="text-[#9A918A] block text-[11px] leading-tight">Satta Literary Council:</span>
+                        <a href="mailto:satta@ulbil.com" className="hover:text-[#D95D24] text-[#2C2420] font-medium transition-colors">
+                          satta@ulbil.com
+                        </a>
+                      </div>
+                      <div>
+                        <span className="text-[#9A918A] block text-[11px] leading-tight">General Public Inquiries:</span>
+                        <a href="mailto:ulu.ins.library@gmail.com" className="hover:text-[#D95D24] text-[#2C2420] font-medium transition-colors">
+                          ulu.ins.library@gmail.com
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
 

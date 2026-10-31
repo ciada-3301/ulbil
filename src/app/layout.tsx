@@ -25,7 +25,7 @@ const notoSerifBengali = Noto_Serif_Bengali({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ulbil.org"),
+  metadataBase: new URL("https://ulbil.com"),
   title: {
     default: "Uluberia Institute & Library | 125th Quasquicentennial Jubilee (1902–2027)",
     template: "%s | Uluberia Institute & Library"
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   keywords: [
     "Uluberia Institute and Library",
     "Uluberia Library",
-    "ulbil.org",
+    "ulbil.com",
     "Uluberia 125th Anniversary",
     "Public Library Howrah",
     "Rare Manuscripts Bengal",
@@ -50,11 +50,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Uluberia Institute & Library (Estd. 1902) — 125th Anniversary",
     description: "A century and a quarter of public service, literacy, and culture. Explore our catalogue, rare archives, and anniversary programs.",
-    url: "https://ulbil.org",
+    url: "https://ulbil.com",
     siteName: "Uluberia Institute & Library",
     images: [
       {
-        url: "https://www.ulbil.org/images/Logo/logo_digital.png",
+        url: "https://www.ulbil.com/images/Logo/logo_digital.png",
         width: 600,
         height: 800,
         alt: "Uluberia Institute & Library Logo"
@@ -70,8 +70,8 @@ const jsonLd = {
   "@type": "Library",
   "name": "Uluberia Institute & Library",
   "alternateName": "উলুবেড়িয়া ইনস্টিটিউট ও লাইব্রেরি",
-  "url": "https://ulbil.org",
-  "logo": "https://www.ulbil.org/images/Logo/logo_digital.png",
+  "url": "https://ulbil.com",
+  "logo": "https://www.ulbil.com/images/Logo/logo_digital.png",
   "foundingDate": "1902",
   "address": {
     "@type": "PostalAddress",
@@ -82,7 +82,7 @@ const jsonLd = {
     "addressCountry": "IN"
   },
   "telephone": "+91-9836330911",
-  "email": "ulu.ins.library@ulbil.org",
+  "email": "secretary@ulbil.com",
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
