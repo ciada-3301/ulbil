@@ -211,8 +211,8 @@ export default function SignUpPage() {
                 onChange={(e) => setSelectedTier(e.target.value)}
                 className="w-full px-3 py-2.5 rounded-xl bg-[#FCFBF7] border border-[#EADBCC] text-xs focus:border-[#C2592B] focus:outline-hidden"
               >
-                <option value="General Reader">General Reader (₹100/yr)</option>
-                <option value="Student & Senior">Student & Senior Concession (₹50/yr)</option>
+                <option value="General Reader">General Reader (₹200/yr)</option>
+                <option value="Student & Senior">Student & Senior Concession (₹100/yr)</option>
                 <option value="Honourable Life Patron">Honourable Life Patron (₹2,500 one-time)</option>
               </select>
             </div>

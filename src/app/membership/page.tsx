@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from 'react';
 import { 
@@ -157,9 +157,9 @@ export default function MembershipPage() {
                   onChange={(e) => setSelectedTier(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F0E8] border border-[#E8E0D4] text-sm focus:border-[#D95D24] focus:outline-hidden text-[#2C2420]"
                 >
-                  <option value="General Reader Membership">General Reader Membership (â‚¹100/yr)</option>
-                  <option value="Student & Senior Concession">Student & Senior Concession (â‚¹50/yr)</option>
-                  <option value="Honourable Life Patron">Honourable Life Patron (â‚¹2,500 one-time)</option>
+                  <option value="General Reader Membership">General Reader Membership (₹200/yr)</option>
+                  <option value="Student & Senior Concession">Student & Senior Concession (₹100/yr)</option>
+                  <option value="Honourable Life Patron">Honourable Life Patron (₹2,500 one-time)</option>
                 </select>
               </div>
 

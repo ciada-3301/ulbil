@@ -38,10 +38,15 @@ export default function HeritageCarousel() {
   };
 
   useEffect(() => {
-    if (thumbnailContainerRef.current) {
-      const activeThumb = thumbnailContainerRef.current.children[currentIndex] as HTMLElement | undefined;
+    const container = thumbnailContainerRef.current;
+    if (container) {
+      const activeThumb = container.children[currentIndex] as HTMLElement | undefined;
       if (activeThumb) {
-        activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        const containerWidth = container.offsetWidth;
+        const thumbLeft = activeThumb.offsetLeft;
+        const thumbWidth = activeThumb.offsetWidth;
+        const targetScrollLeft = thumbLeft - (containerWidth / 2) + (thumbWidth / 2);
+        container.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
       }
     }
   }, [currentIndex]);
